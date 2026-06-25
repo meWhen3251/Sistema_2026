@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="B1qoC5SFOxiClZSEWr_v">
+    <mxGraphModel dx="860" dy="445" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-5" edge="1" parent="1" source="DvNdZpzaBA9OQZGNfQM7-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="DvNdZpzaBA9OQZGNfQM7-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="Modificación de preguntas y respuestas de seguridad" vertex="1">
+          <mxGeometry height="100" width="100" x="364" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Usuario&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="384" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Administrador&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="680" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-10" edge="1" parent="1" source="DvNdZpzaBA9OQZGNfQM7-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="DvNdZpzaBA9OQZGNfQM7-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="Boton de modificación de datos de usuario" vertex="1">
+          <mxGeometry height="100" width="100" x="364" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-6" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="560" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-7" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="modificación de roles de todos los usuario" vertex="1">
+          <mxGeometry height="100" width="100" x="727" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-12" edge="1" parent="1" source="DvNdZpzaBA9OQZGNfQM7-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="DvNdZpzaBA9OQZGNfQM7-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-14" edge="1" parent="1" source="DvNdZpzaBA9OQZGNfQM7-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="DvNdZpzaBA9OQZGNfQM7-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-9" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="si usuario tiene rol de administrador" vertex="1">
+          <mxGeometry height="130" width="110" x="580" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="DvNdZpzaBA9OQZGNfQM7-13" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="modificación de roles de todos los usuario" vertex="1">
+          <mxGeometry height="100" width="100" x="585" y="440" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
