@@ -1,0 +1,111 @@
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.exe
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.deps.json
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.runtimeconfig.json
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.pdb
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\MailKit.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\MimeKit.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.AssemblyReference.cache
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormAdmin.resources
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormFirstLogin.resources
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.FormLogin.resources
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.GenerateResource.cache
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.AssemblyInfoInputs.cache
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.AssemblyInfo.cs
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.CoreCompileInputs.cache
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema .A61C920F.Up2Date
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\refint\Sistema de Gestion de Usuario.dll
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.pdb
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.genruntimeconfig.cache
+C:\Users\TT\Desktop\EEST\Proyecto Anual\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\ref\Sistema de Gestion de Usuario.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.AssemblyReference.cache
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormAdmin.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormFirstLogin.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.FormLogin.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormRecuperar.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.GenerateResource.cache
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.GeneratedMSBuildEditorConfig.editorconfig
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.AssemblyInfoInputs.cache
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.AssemblyInfo.cs
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.CoreCompileInputs.cache
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.exe
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.deps.json
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.runtimeconfig.json
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.pdb
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\MailKit.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\MimeKit.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema .A61C920F.Up2Date
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\refint\Sistema de Gestion de Usuario.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.pdb
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.genruntimeconfig.cache
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\ref\Sistema de Gestion de Usuario.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.exe
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.deps.json
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.runtimeconfig.json
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.pdb
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\MailKit.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\MimeKit.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Configuration.ConfigurationManager.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Diagnostics.EventLog.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Security.Cryptography.ProtectedData.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.AssemblyReference.cache
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormAdmin.resources
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormFirstLogin.resources
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.FormLogin.resources
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormRecuperar.resources
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.GenerateResource.cache
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.GeneratedMSBuildEditorConfig.editorconfig
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.AssemblyInfoInputs.cache
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.AssemblyInfo.cs
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.csproj.CoreCompileInputs.cache
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema .A61C920F.Up2Date
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\refint\Sistema de Gestion de Usuario.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.pdb
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema de Gestion de Usuario.genruntimeconfig.cache
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\ref\Sistema de Gestion de Usuario.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll.config
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\App.config
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\App.config
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\Sistema de Gestion de Usuario.dll.config
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Configuration.ConfigurationManager.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Diagnostics.EventLog.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\System.Security.Cryptography.ProtectedData.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormNuevaContrasena.resources
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormPanelGeneral.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormNuevaContrasena.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormPanelGeneral.resources
+E:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormPSeguridadLogin.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.Form2FA.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Forms.FormPSeguridadLogin_Inutilizable.resources
+D:\EEST\PP\Ferrando\Sistema de Gestion de Usuario\Sistema de Gestion de Usuario\obj\Debug\net8.0-windows\Sistema_de_Gestion_de_Usuario.Properties.Resources.resources
