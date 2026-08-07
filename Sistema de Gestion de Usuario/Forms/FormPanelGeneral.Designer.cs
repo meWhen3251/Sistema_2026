@@ -24,7 +24,7 @@
             // 
             lbl_Bienvenida.AutoSize = true;
             lbl_Bienvenida.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
-            lbl_Bienvenida.Location = new Point(170, 23);
+            lbl_Bienvenida.Location = new Point(184, 20);
             lbl_Bienvenida.Name = "lbl_Bienvenida";
             lbl_Bienvenida.Size = new Size(166, 24);
             lbl_Bienvenida.TabIndex = 0;

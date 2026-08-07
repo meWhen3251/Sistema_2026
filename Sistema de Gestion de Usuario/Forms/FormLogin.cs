@@ -86,7 +86,7 @@ namespace Sistema_de_Gestion_de_Usuario
                     ClassData.esAdmin = !(rolResult is null || rolResult.Rows.Count == 0);
 
                     // Pedir confirmación de identidad con preguntas de seguridad.
-                    ClassMethods.abrirFormulario(this, new Form2FA());
+                    ClassMethods.abrirFormulario(this, new FormPanelGeneral());
                 }
             }
             catch (Exception ex)
