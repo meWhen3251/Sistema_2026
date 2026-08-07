@@ -3,8 +3,8 @@ Este es el repositorio donde se guardarán los elementos utilizados para la crea
 Está conformado por los integrantes:
  - *Farias Nicolás*
  - *Papa Alvarez Rocio* ([roco](https://github.com/millkyshakey))
- - *Sala Pustelnik Teo*
- - *Ureña Bustamante Francisco ([me_when](https://github.com/meWhen3251))*
+ - *[Sala Pustelnik Teo](https://github.com/tospustelnik)*
+ - *Ureña Bustamante Francisco* ([me_when](https://github.com/meWhen3251))
 
 ## Sistema de Gestion de Usuarios
 El Sistema de Gestión de usuarios fue trabajado desde marzo hasta julio.
