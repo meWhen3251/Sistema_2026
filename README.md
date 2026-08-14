@@ -18,4 +18,4 @@ Este es un proyecto separado del sistema original, para la materia "Modelos y Si
 Adicionalmente, debido al tamaño del video asociado con la maqueta, se encuentra aquí:
 > https://youtu.be/GhBgNGwMnTk
 
-<sub>Nota final: 9</sub>
+<sub>Nota final: 9,5</sub>
