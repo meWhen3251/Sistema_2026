@@ -16,6 +16,6 @@ La implementación de este módulo al sistema se verá reflejado en el transcurs
 ### Maqueta "ABM de ventas de tecnología"
 Este es un proyecto separado del sistema original, para la materia "Modelos y Sistemas". Los archivos se encuentran publicados en [este enlace](https://github.com/meWhen3251/Sistema_2026/tree/roco/ABM%20Venta%20de%20Productos).
 Adicionalmente, debido al tamaño del video asociado con la maqueta, se encuentra aquí:
-
 > https://youtu.be/GhBgNGwMnTk
 
+<sub>Nota final: 9</sub>
