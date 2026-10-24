@@ -1,0 +1,13 @@
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\bin\Debug\net8.0\Capa_Datos.deps.json
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\bin\Debug\net8.0\Capa_Datos.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\bin\Debug\net8.0\Capa_Datos.pdb
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.csproj.AssemblyReference.cache
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.AssemblyInfoInputs.cache
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.AssemblyInfo.cs
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.csproj.CoreCompileInputs.cache
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\refint\Capa_Datos.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\Capa_Datos.pdb
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\obj\Debug\net8.0\ref\Capa_Datos.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Datos\bin\Debug\net8.0\Capa_Datos.dll.config

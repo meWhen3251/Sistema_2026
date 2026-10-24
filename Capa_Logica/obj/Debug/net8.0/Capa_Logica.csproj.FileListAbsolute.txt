@@ -1,0 +1,11 @@
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\bin\Debug\net8.0\Capa_Logica.deps.json
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\bin\Debug\net8.0\Capa_Logica.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\bin\Debug\net8.0\Capa_Logica.pdb
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\Capa_Logica.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\Capa_Logica.AssemblyInfoInputs.cache
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\Capa_Logica.AssemblyInfo.cs
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\Capa_Logica.csproj.CoreCompileInputs.cache
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\Capa_Logica.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\refint\Capa_Logica.dll
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\Capa_Logica.pdb
+D:\Sistema de Gestion\Sistema de Gestion de Usuarios\Capa_Logica\obj\Debug\net8.0\ref\Capa_Logica.dll
