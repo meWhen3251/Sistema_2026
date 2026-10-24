@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Capa_Datos\Capa_Datos.csproj" />
+    <ProjectReference Include="..\Capa_Logica\Capa_Logica.csproj" />
+    <ProjectReference Include="..\Capa_Servicios\Capa_Servicios.csproj" />
+    <ProjectReference Include="..\Capa_Sesion\Capa_Sesion.csproj" />
+  </ItemGroup>
+
+</Project>
