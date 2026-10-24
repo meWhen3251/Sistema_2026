@@ -69,7 +69,7 @@ namespace Capa_Datos
             return DB.UsarSP_ConParametros("SP_ObtenerPreguntasSeguridad", parametros);
         }
         //SP_ObtenerPermisosUsuariosCompleto - Obtiene los permisos y usuarios
-        public DataTable SP_ObtenerPermisosUsuariosCompleto(int ?idUsuario = null)
+        public DataTable SP_ObtenerPermisosUsuariosCompleto(int? idUsuario = null)
         {
             SqlParameter[] parametros = new SqlParameter[]
             {
@@ -159,13 +159,63 @@ namespace Capa_Datos
             return DB.UsarSP_ConParametros("SP_ObtenerCorreoPorUsuario", parametros);
         }
 
-        public DataTable SP_CargaDatosUsuario(int idUsuario) 
+        // SP_CargaDatosUsuario - obtiene datos de un usuario específico vía ID_Usuario
+        public DataTable SP_CargaDatosUsuario(int idUsuario)
         {
             SqlParameter[] parametros = new SqlParameter[]
             {
                 new SqlParameter("@ID_Usuario", idUsuario)
             };
             return DB.UsarSP_ConParametros("SP_CargaDatosUsuario", parametros);
+        }
+        //SP_ObtenerPermisosFaltantesUsuario - Obtiene los permisos que no tiene un usuario
+        public DataTable SP_ObtenerPermisosFaltantesUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("ID_Usuario", idUsuario)
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerPermisosFaltantesUsuario", parametros);
+        }
+        //SP_ObtenerRolesDeUsuario - Obtiene los roles que tiene vinculado un usuario
+        public DataTable SP_ObtenerRolesDeUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("ID_Usuario", idUsuario)
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerRolesDeUsuario", parametros);
+        }
+
+        //SP_ObtenerFamiliasDeUsuario - Obtiene las familias que tiene vinculado un usuario
+
+        public DataTable SP_ObtenerFamiliasDeUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("ID_Usuario", idUsuario)
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerFamiliasDeUsuario", parametros);
+        }
+
+        //SP_ObtenerPermisosDeUsuario - Obtiene los permisos que tiene vinculado un usuario
+
+        public DataTable SP_ObtenerPermisosDeUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("ID_Usuario", idUsuario)
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerPermisosDeUsuario", parametros);
+        }
+        // Datos del usuario. Columnas: ID_Usuario, NombreUsuario, Nombre, Apellido, Correo, UltimaPass
+        public DataTable SP_ObtenerDatosUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+                {
+                new SqlParameter("@ID_Usuario", idUsuario) 
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerDatosUsuario", parametros);
         }
 
         // ══════════════════════════════════════════════════════════════════════
@@ -251,16 +301,17 @@ namespace Capa_Datos
             DB.UsarSP_ConParametros("SP_InsertarUsuarioCompleto", parametros);
         }
 
-        // Inserta una nueva contraseña para un usuario ya existente.
-        // El SP se encarga de: desactivar la contraseña anterior, insertar la nueva como activa, y verificar que no sea igual a una ya usada.
-        public void SP_InsertarContrasena(string contrasena, int idUsuario)
+        // Guarda una contraseña nueva (ya hasheada).
+        // validarHistorial = false -> permite repetir contraseñas anteriores (config NoRepetirPass = 0)
+        public void SP_GuardarContrasena(string contrasena, int idUsuario, bool validarHistorial = true)
         {
             SqlParameter[] parametros = new SqlParameter[]
             {
                 new SqlParameter("@contrasena", contrasena),
-                new SqlParameter("@ID_Usuario", idUsuario)
+                new SqlParameter("@ID_Usuario", idUsuario),
+                new SqlParameter("@ValidarHistorial", validarHistorial)
             };
-            DB.UsarSP_ConParametros("SP_InsertarContrasena", parametros);
+            DB.UsarSP_ConParametros("SP_GuardarContrasena", parametros);
         }
 
         // Guarda la respuesta de una pregunta de seguridad para un usuario.
@@ -410,6 +461,18 @@ namespace Capa_Datos
                 new SqlParameter("@ID_Permiso", idPermiso)
             };
             DB.UsarSP_ConParametros("SP_AgregarFamiliaPermiso", parametros);
+        }
+
+        // Quita la asignación de un permiso, familia o rol a un usuario.
+        public void SP_QuitarAsignacionUsuario(string tipo, int id, int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@Tipo", tipo),
+                new SqlParameter("@ID", id),
+                new SqlParameter("@ID_Usuario", idUsuario)
+            };
+            DB.UsarSP_ConParametros("SP_QuitarAsignacionUsuario", parametros);
         }
     }
 }
