@@ -105,6 +105,7 @@
             btn_QuitarRol.TabIndex = 5;
             btn_QuitarRol.Text = "Quitar rol seleccionado...";
             btn_QuitarRol.UseVisualStyleBackColor = true;
+            btn_QuitarRol.Click += btn_QuitarRol_Click;
             // 
             // btn_AgregarFamilia
             // 
@@ -124,6 +125,7 @@
             btn_QuitarFamilia.TabIndex = 7;
             btn_QuitarFamilia.Text = "Quitar de familia seleccionada...";
             btn_QuitarFamilia.UseVisualStyleBackColor = true;
+            btn_QuitarFamilia.Click += btn_QuitarFamilia_Click;
             // 
             // btn_AgregarPermiso
             // 
@@ -143,13 +145,14 @@
             btn_QuitarPermiso.TabIndex = 9;
             btn_QuitarPermiso.Text = "Quitar permiso seleccionado...";
             btn_QuitarPermiso.UseVisualStyleBackColor = true;
+            btn_QuitarPermiso.Click += btn_QuitarPermiso_Click;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(flp_InformacionUsuario);
             groupBox1.Location = new Point(391, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(349, 422);
+            groupBox1.Size = new Size(349, 352);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Informacion personal";
@@ -159,17 +162,18 @@
             flp_InformacionUsuario.FlowDirection = FlowDirection.TopDown;
             flp_InformacionUsuario.Location = new Point(6, 22);
             flp_InformacionUsuario.Name = "flp_InformacionUsuario";
-            flp_InformacionUsuario.Size = new Size(337, 394);
+            flp_InformacionUsuario.Size = new Size(337, 324);
             flp_InformacionUsuario.TabIndex = 0;
             // 
             // btn_SolicitarNuevaPass
             // 
-            btn_SolicitarNuevaPass.Location = new Point(495, 480);
+            btn_SolicitarNuevaPass.Location = new Point(448, 571);
             btn_SolicitarNuevaPass.Name = "btn_SolicitarNuevaPass";
             btn_SolicitarNuevaPass.Size = new Size(245, 49);
             btn_SolicitarNuevaPass.TabIndex = 11;
             btn_SolicitarNuevaPass.Text = "Solicitar nuevo cambio de contraseña";
             btn_SolicitarNuevaPass.UseVisualStyleBackColor = true;
+            btn_SolicitarNuevaPass.Click += btn_SolicitarNuevaPass_Click;
             // 
             // label1
             // 
@@ -210,7 +214,7 @@
             // lbl_TiempoUltimaPass
             // 
             lbl_TiempoUltimaPass.AutoSize = true;
-            lbl_TiempoUltimaPass.Location = new Point(495, 460);
+            lbl_TiempoUltimaPass.Location = new Point(448, 551);
             lbl_TiempoUltimaPass.Name = "lbl_TiempoUltimaPass";
             lbl_TiempoUltimaPass.Size = new Size(245, 15);
             lbl_TiempoUltimaPass.TabIndex = 17;
@@ -224,6 +228,7 @@
             btn_Volver.TabIndex = 18;
             btn_Volver.Text = "Volver";
             btn_Volver.UseVisualStyleBackColor = true;
+            btn_Volver.Click += btn_Volver_Click;
             // 
             // lbl_NombreUsuario
             // 
