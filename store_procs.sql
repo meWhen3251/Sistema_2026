@@ -204,25 +204,7 @@ BEGIN
 END
 GO
 
--- ?. Cargar Roles y Usuarios (NUEVO)
-CREATE PROCEDURE sp_ObtenerPermisosFaltantesUsuario
-    @ID_Usuario INT
-AS
-BEGIN
-    SET NOCOUNT ON;
 
-    SELECT 
-        p.ID_Permiso,
-        p.Permiso AS NombrePermiso,
-        p.Descripcion
-    FROM Permisos p
-    WHERE p.ID_Permiso NOT IN (
-        SELECT pu.ID_Permiso 
-        FROM PermisosUsuarios_Comp pu 
-        WHERE pu.ID_Usuario = @ID_Usuario
-    );
-END
-GO
 
 
 -- 11. Cargar Usuarios para la listbox, con su ID para luego poder hacer modificaciones
@@ -273,6 +255,160 @@ BEGIN
     INNER JOIN Personas ON Usuarios.ID_Persona = Personas.ID_Persona
 END
 GO
+
+-- ?. Cargar Roles y Usuarios (NUEVO)
+CREATE PROCEDURE SP_ObtenerPermisosFaltantesUsuario
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        Permisos.ID_Permiso,
+        Permisos.Permiso,
+        Permisos.Descripcion
+    FROM Permisos
+    WHERE Permisos.ID_Permiso NOT IN (
+        SELECT PermisosUsuarios_Comp.ID_Permiso 
+        FROM PermisosUsuarios_Comp 
+        WHERE PermisosUsuarios_Comp.ID_Usuario = @ID_Usuario
+    );
+END
+GO
+
+-- ?. Devuelve todos los roles vinculados a un usuario (NUEVO)
+CREATE PROCEDURE SP_ObtenerRolesDeUsuario
+@ID_Usuario INT
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT 
+        Roles.ID_Rol,
+        Roles.Nombre,
+        Roles.Descripcion
+    FROM Roles
+
+    WHERE Roles.ID_Rol IN (
+        SELECT RolesUsuarios_Comp.ID_Rol 
+        FROM RolesUsuarios_Comp
+        WHERE RolesUsuarios_Comp.ID_Usuario = @ID_Usuario
+      );
+END
+GO
+
+-- ?. Devuelve todas las familias vinculadas a un usuario (NUEVO)
+CREATE PROCEDURE SP_ObtenerFamiliasDeUsuario
+@ID_Usuario INT
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT 
+        Familia.ID_Familia,
+        Familia.Nombre
+    FROM Familia
+
+    WHERE Familia.ID_Familia IN (
+        SELECT FamiliaUsuarios_Comp.ID_Familia 
+        FROM FamiliaUsuarios_Comp
+        WHERE FamiliaUsuarios_Comp.ID_Usuario = @ID_Usuario
+      );
+END
+GO
+
+-- ?. Devuelve todos los permisos vinculadas a un usuario (NUEVO)
+
+CREATE PROCEDURE SP_ObtenerPermisosDeUsuario
+@ID_Usuario INT
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT 
+        Permisos.ID_Permiso,
+        Permisos.Permiso,
+        Permisos.Descripcion
+    FROM Permisos
+
+    WHERE Permisos.ID_Permiso IN (
+        SELECT PermisosUsuarios_Comp.ID_Permiso 
+        FROM PermisosUsuarios_Comp
+        WHERE PermisosUsuarios_Comp.ID_Usuario = @ID_Usuario
+      );
+END
+GO
+
+-- ?. Datos de un usuario: personales y fecha de su contraseña activa (NUEVO)
+CREATE PROCEDURE SP_ObtenerDatosUsuario
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    SELECT
+        Usuarios.ID_Usuario,
+        Usuarios.Nombre             AS NombreUsuario,
+        Personas.Nombre             AS Nombre,
+        Personas.Apellido           AS Apellido,
+        Personas.Correo             AS Correo,
+        Contrasenas.fecha_creacion  AS UltimaPass
+    FROM Usuarios
+    INNER JOIN Personas ON Usuarios.ID_Persona = Personas.ID_Persona
+    LEFT JOIN Historico_Contrasenas ON Historico_Contrasenas.ID_Usuario = Usuarios.ID_Usuario
+                                   AND Historico_Contrasenas.Activo = 1
+    LEFT JOIN Contrasenas ON Contrasenas.ID_Pass = Historico_Contrasenas.ID_Pass
+    WHERE Usuarios.ID_Usuario = @ID_Usuario
+END
+GO
+
+-- ?. Quita rol, familia o permiso dependiendo de que se llame (NUEVO)
+CREATE PROCEDURE SP_QuitarAsignacionUsuario
+    @Tipo VARCHAR(10), -- 'Rol', 'Familia' o 'Permiso'
+    @ID INT, -- ID del rol, familia o permiso
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @Filas INT = 0;
+ 
+    IF @Tipo = 'Rol'
+    BEGIN
+        IF EXISTS (SELECT 1 FROM Roles WHERE ID_Rol = @ID AND Nombre = 'Administrador')
+           AND EXISTS (SELECT 1 FROM RolesUsuarios_Comp WHERE ID_Rol = @ID AND ID_Usuario = @ID_Usuario)
+           AND (SELECT COUNT(*) FROM RolesUsuarios_Comp WHERE ID_Rol = @ID) <= 1
+        BEGIN
+            RAISERROR('No se puede quitar el rol Administrador al único administrador del sistema.', 16, 1)
+            RETURN
+        END
+ 
+        DELETE FROM RolesUsuarios_Comp WHERE ID_Rol = @ID AND ID_Usuario = @ID_Usuario
+        SET @Filas = @@ROWCOUNT
+    END
+    ELSE IF @Tipo = 'Familia'
+    BEGIN
+        DELETE FROM FamiliaUsuarios_Comp WHERE ID_Familia = @ID AND ID_Usuario = @ID_Usuario
+        SET @Filas = @@ROWCOUNT
+    END
+    ELSE IF @Tipo = 'Permiso'
+    BEGIN
+        DELETE FROM PermisosUsuarios_Comp WHERE ID_Permiso = @ID AND ID_Usuario = @ID_Usuario
+        SET @Filas = @@ROWCOUNT
+    END
+    ELSE
+    BEGIN
+        RAISERROR('Tipo no válido. Use Rol, Familia o Permiso.', 16, 1)
+        RETURN
+    END
+ 
+    IF @Filas = 0
+        RAISERROR('El usuario no tiene asignado ese elemento.', 16, 1)
+END
+GO
+
 /*
   ___                     _                 _   _           _       _                 ____                              _        __                    
  |_ _|_ __  ___  ___ _ __| |_ ___   _   _  | | | |_ __   __| | __ _| |_ ___  ___ _   / ___|__ _ _ __ __ _  __ _ _ __   (_)_ __  / _| ___     ___ _ __  
@@ -409,45 +545,52 @@ BEGIN
 END
 GO
 
--- 17. Agregar nueva contraseña, 
-CREATE PROCEDURE SP_InsertarContrasena
-    @contrasena NVARCHAR(255),
-    @ID_Usuario INT
+-- 17. Agregar nueva contraseña [MODIFICADO: Se agregó el parámetro @ID_Usuario para poder actualizar la contraseña de un usuario específico
+--                               y poder solicitar una nueva contrasena en formAjusteUsuario]
+CREATE PROCEDURE SP_GuardarContrasena
+    @contrasena NVARCHAR(64),
+    @ID_Usuario INT,
+    @ValidarHistorial BIT = 1
 AS
 BEGIN
-	BEGIN TRANSACTION
-
-        IF NOT EXISTS (SELECT * FROM Contrasenas 
-            inner join Historico_Contrasenas on Contrasenas.ID_Pass = Historico_Contrasenas.ID_Pass
-            WHERE Historico_Contrasenas.ID_Usuario = @ID_Usuario AND Contrasenas.contrasena = @contrasena)
-            BEGIN
-
-                BEGIN TRANSACTION
-                    INSERT INTO Contrasenas (contrasena,fecha_creacion)
-	                VALUES (@contrasena, GETDATE());
-                    DECLARE @ID_Pass INT = SCOPE_IDENTITY()
-                COMMIT TRANSACTION
-        
-                BEGIN TRANSACTION
-                    UPDATE Historico_Contrasenas
-                    SET Activo = 0
-                    WHERE ID_Usuario = @ID_Usuario
-                COMMIT TRANSACTION
-            
-                BEGIN TRANSACTION
-                    INSERT INTO Historico_Contrasenas (ID_Usuario,ID_Pass,Activo)
-                    VALUES (@ID_Usuario,@ID_Pass,1)
-                COMMIT TRANSACTION
-            END
-        ELSE
-        BEGIN
-            RAISERROR('La contraseña no puede ser igual a las anteriores.', 16, 1)
-            RETURN
-        END
-    COMMIT TRANSACTION
+    SET NOCOUNT ON;
+ 
+    IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE ID_Usuario = @ID_Usuario)
+    BEGIN
+        RAISERROR('El usuario no existe.', 16, 1)
+        RETURN
+    END
+ 
+    IF @ValidarHistorial = 1
+       AND EXISTS (SELECT 1 FROM Contrasenas
+                   INNER JOIN Historico_Contrasenas ON Contrasenas.ID_Pass = Historico_Contrasenas.ID_Pass
+                   WHERE Historico_Contrasenas.ID_Usuario = @ID_Usuario
+                     AND Contrasenas.contrasena = @contrasena)
+    BEGIN
+        RAISERROR('La contraseña no puede ser igual a las anteriores.', 16, 1)
+        RETURN
+    END
+ 
+    BEGIN TRY
+        BEGIN TRANSACTION
+ 
+            INSERT INTO Contrasenas (contrasena, fecha_creacion)
+            VALUES (@contrasena, GETDATE());
+            DECLARE @ID_Pass INT = SCOPE_IDENTITY();
+ 
+            UPDATE Historico_Contrasenas SET Activo = 0 WHERE ID_Usuario = @ID_Usuario;
+ 
+            INSERT INTO Historico_Contrasenas (ID_Usuario, ID_Pass, Activo)
+            VALUES (@ID_Usuario, @ID_Pass, 1);
+ 
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
 END
 GO
-
 -- 18. Crear respuestas de seguridad para un usuario, asociándolas a sus preguntas correspondientes
 CREATE PROCEDURE SP_InsertarRespuestaSeguridad
     @ID_Pregunta INT,
