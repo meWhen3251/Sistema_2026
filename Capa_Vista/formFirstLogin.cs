@@ -106,13 +106,20 @@ namespace Capa_Vista
                 return;
             }
 
+            if (claseMetodos.EsContrasenaTemporal(tbox_Contrasena.Text.Trim()))
+            {
+                MessageBox.Show("La contraseña no puede ser de solo 6 números: ese formato lo usa el sistema para las contraseñas temporales.");
+                tbox_Contrasena.Focus();
+                return;
+            }
+
             try
             {
                 // -- Guardar nueva contraseña
                 // Se encripta igual que en el login: SHA256(contraseña + nombreUsuario)
                 // nombreUsuario e idUsuario vienen de ClassData (se llenaron en el login).
                 string hash = claseMetodos.encryptToSHA256(tbox_Contrasena.Text.Trim() + nombreUsuario);
-                claseSP.SP_InsertarContrasena(hash, idUsuario);
+                claseSP.SP_GuardarContrasena(hash, idUsuario);
 
                 // -- Guardar respuestas de seguridad
                 // Itera sobre la lista de tuplas (IdPregunta, TextBox).

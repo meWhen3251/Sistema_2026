@@ -139,7 +139,7 @@ namespace Capa_Vista
             {
                 // Guardar la contraseña temporal encriptada en la base de datos.
                 // El SP desactiva la contraseña anterior y activa la contraseña temporal.
-                claseSP.SP_InsertarContrasena(contrasenaTempHash, idUsuarioRecuperando);
+                claseSP.SP_GuardarContrasena(contrasenaTempHash, idUsuarioRecuperando, validarHistorial: false);
 
                 // Enviar al correo la contraseña en texto plano.
                 // "await" pausa la ejecución hasta que el mail se envíe, sin bloquear la interfaz gráfica.

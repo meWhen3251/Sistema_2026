@@ -71,9 +71,16 @@ namespace Capa_Vista
                     // Primer login: el usuario debe cambiar su contraseña y configurar sus preguntas de seguridad.
                     MessageBox.Show("Es tu primer login. Debés cambiar tu contraseña y responder las preguntas de seguridad.");
                     formFirstLogin formFirstLogin = new formFirstLogin();
-
                     this.Hide();
                     formFirstLogin.Show();
+                }
+                else if (claseMetodos.EsContrasenaTemporal(contrasenaIngresada))
+                {
+                    // Entró con una contraseña temporal (recuperación o cambio pedido por el administrador)
+                    MessageBox.Show("Ingresaste con una contraseña temporal. Por seguridad, debés elegir una nueva contraseña antes de continuar.");
+                    formNuevaContrasena formNuevaContrasena = new formNuevaContrasena();
+                    this.Hide();
+                    formNuevaContrasena.Show();
                 }
                 else
                 {
@@ -100,7 +107,6 @@ namespace Capa_Vista
         private void Llabel_Recuperar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             formRecuperarContrasena formRecuperarContrasena = new formRecuperarContrasena();
-
             this.Hide();
             formRecuperarContrasena.Show();
 

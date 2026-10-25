@@ -24,17 +24,24 @@ namespace Capa_Vista
                 return;
             }
 
+            if (claseMetodos.EsContrasenaTemporal(tbox_NuevaContra.Text.Trim()))
+            {
+                MessageBox.Show("La contraseña no puede ser de solo 6 números: ese formato lo usa el sistema para las contraseñas temporales.");
+                tbox_NuevaContra.Focus();
+                return;
+            }
+
             try
             {
                 // Encripta en SHA256(nuevaContraseña + nombreUsuario)
                 // ClassData.nombreUsuario contiene el nombre del usuario logueado.
                 string hash = claseMetodos.encryptToSHA256(tbox_NuevaContra.Text.Trim() + claseVar.nombreUsuario);
 
-                // SP_InsertarContrasena se encarga de:
+                // SP_GuardarContrasena se encarga de:
                 //   - Desactivar la contraseña anterior en Historico_Contrasenas.
                 //   - Insertar la nueva contraseña en Contrasenas.
                 //   - Verificar que no sea una contraseña ya utilizada.
-                claseSP.SP_InsertarContrasena(hash, claseVar.idUsuario);
+                claseSP.SP_GuardarContrasena(hash, claseVar.idUsuario);
 
                 MessageBox.Show("Nueva contraseña registrada.");
                 // Volver al login para que el usuario autentique con la nueva contraseña.
@@ -46,7 +53,13 @@ namespace Capa_Vista
             {
                 MessageBox.Show($"Error al guardar la contraseña: {ex.Message}");
             }
+        }
 
+        private void btn_Volver_Click(object sender, EventArgs e)
+        {
+            formLogin formLogin = new formLogin();
+            this.Hide();
+            formLogin.Show();
         }
     }
 }

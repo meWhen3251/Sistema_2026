@@ -32,7 +32,6 @@
             label1 = new Label();
             btn_ModificarRol = new Button();
             btn_AgregarRol = new Button();
-            btn_EliminarRol = new Button();
             btn_Volver = new Button();
             tbox_RolSeleccionado = new TextBox();
             tbox_RolModificado = new TextBox();
@@ -62,7 +61,7 @@
             // 
             // btn_ModificarRol
             // 
-            btn_ModificarRol.Location = new Point(626, 302);
+            btn_ModificarRol.Location = new Point(12, 352);
             btn_ModificarRol.Name = "btn_ModificarRol";
             btn_ModificarRol.Size = new Size(162, 38);
             btn_ModificarRol.TabIndex = 2;
@@ -72,23 +71,13 @@
             // 
             // btn_AgregarRol
             // 
-            btn_AgregarRol.Location = new Point(396, 346);
+            btn_AgregarRol.Location = new Point(626, 311);
             btn_AgregarRol.Name = "btn_AgregarRol";
             btn_AgregarRol.Size = new Size(162, 38);
             btn_AgregarRol.TabIndex = 3;
             btn_AgregarRol.Text = "Agregar nuevo rol";
             btn_AgregarRol.UseVisualStyleBackColor = true;
             btn_AgregarRol.Click += btn_AgregarRol_Click;
-            // 
-            // btn_EliminarRol
-            // 
-            btn_EliminarRol.Location = new Point(12, 346);
-            btn_EliminarRol.Name = "btn_EliminarRol";
-            btn_EliminarRol.Size = new Size(162, 38);
-            btn_EliminarRol.TabIndex = 4;
-            btn_EliminarRol.Text = "Eliminar rol seleccionado";
-            btn_EliminarRol.UseVisualStyleBackColor = true;
-            btn_EliminarRol.Click += btn_EliminarRol_Click;
             // 
             // btn_Volver
             // 
@@ -117,7 +106,7 @@
             // 
             // btn_ActualizarRol
             // 
-            btn_ActualizarRol.Location = new Point(192, 346);
+            btn_ActualizarRol.Location = new Point(285, 296);
             btn_ActualizarRol.Name = "btn_ActualizarRol";
             btn_ActualizarRol.Size = new Size(162, 38);
             btn_ActualizarRol.TabIndex = 8;
@@ -145,7 +134,7 @@
             // 
             // tbox_NuevoRol
             // 
-            tbox_NuevoRol.Location = new Point(396, 317);
+            tbox_NuevoRol.Location = new Point(626, 282);
             tbox_NuevoRol.Name = "tbox_NuevoRol";
             tbox_NuevoRol.Size = new Size(162, 23);
             tbox_NuevoRol.TabIndex = 11;
@@ -162,7 +151,6 @@
             Controls.Add(tbox_RolModificado);
             Controls.Add(tbox_RolSeleccionado);
             Controls.Add(btn_Volver);
-            Controls.Add(btn_EliminarRol);
             Controls.Add(btn_AgregarRol);
             Controls.Add(btn_ModificarRol);
             Controls.Add(label1);
@@ -181,7 +169,6 @@
         private Label label1;
         private Button btn_ModificarRol;
         private Button btn_AgregarRol;
-        private Button btn_EliminarRol;
         private Button btn_Volver;
         private TextBox tbox_RolSeleccionado;
         private TextBox tbox_RolModificado;

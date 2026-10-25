@@ -53,7 +53,7 @@ namespace Capa_Vista
                 CargaPreguntasSeguridad();
                 MessageBox.Show("Pregunta actualizada con exito.");
                 tbox_PreguntaAnterior.Text = "";
-                tbox_PreguntaNueva.Text = "";
+                tbox_NuevaPregunta.Text = "";
             }
             catch (Exception ex)
             {
@@ -103,9 +103,7 @@ namespace Capa_Vista
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            formPanelAdmin formPanelAdmin = new formPanelAdmin();
-            formPanelAdmin.Show();
-            this.Hide();
+            this.Close();
         }
         private void CargaPreguntasSeguridad()
         {

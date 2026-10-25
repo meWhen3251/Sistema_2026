@@ -211,7 +211,7 @@ namespace Capa_Vista
             {
                 btn_SolicitarNuevaPass.Enabled = false;
 
-                string temporal = "TMP-" + RandomNumberGenerator.GetInt32(100000, 1000000);
+                string temporal = RandomNumberGenerator.GetInt32(100000, 1000000).ToString();
 
                 // El hash usa el nombre del usuario SELECCIONADO (no el del administrador)
                 string hash = claseMetodos.encryptToSHA256(temporal + usuario);

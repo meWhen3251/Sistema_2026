@@ -21,7 +21,7 @@ namespace Capa_Vista
             try
             {
                 int idRol = Convert.ToInt32(dgv_TablasRoles.SelectedRows[0].Cells["ID_Rol"].Value);
-                //claseSP.SP_AgregarRolUsuario(idRol, claseVar.idUsuario); //SP_AgregarRolUsuario se tiene que cambiar para que tenga que necesite ID_Rol e ID_Usuario en vez del nombre del rol y nombre de usuario
+                claseSP.SP_AgregarRolUsuario(idRol, claseVar.idUsuario);
                 CargarListaRolesUsuario();
                 MessageBox.Show("Usuario agregado a la familia con exito");
             }
@@ -33,9 +33,7 @@ namespace Capa_Vista
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            formPanelAdmin formPanelAdmin = new formPanelAdmin();
-            formPanelAdmin.Show();
-            this.Hide();
+            this.Close();
         }
 
 
@@ -59,13 +57,13 @@ namespace Capa_Vista
 
         private void CargarListaRolesUsuario()
         {
-            //dgv_TablasRoles.DataSource = //SP_CargaRolesUsuarios FALTANTE//
+            dgv_TablasRoles.DataSource = claseSP.SP_ObtenerRolesFaltantesUsuario(claseVar.idUsuario);
 
             // El ID viaja en la tabla para identificar la fila seleccionada, pero no se muestra
             if (dgv_TablasRoles.Columns["ID_Rol"] != null)
                 dgv_TablasRoles.Columns["ID_Rol"].HeaderText = "ID_Rol";
-            if (dgv_TablasRoles.Columns["ID_Usuario"] != null)
-                dgv_TablasRoles.Columns["ID_Usuario"].HeaderText = "ID_Usuario";
+            if (dgv_TablasRoles.Columns["Nombre"] != null)
+                dgv_TablasRoles.Columns["Nombre"].HeaderText = "Nombre";
 
             dgv_TablasRoles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_TablasRoles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

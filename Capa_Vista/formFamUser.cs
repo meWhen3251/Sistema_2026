@@ -14,22 +14,6 @@ namespace Capa_Vista
         {
             CargarListaFamiliaUsuario();
         }
-        private void CargarListaFamiliaUsuario()
-        {
-            //dgv_TablaFamilia.DataSource = //SP_CargaFamUser FALTANTE//
-
-            // El ID viaja en la tabla para identificar la fila seleccionada, pero no se muestra
-            if (dgv_TablaFamilia.Columns["ID_Familia"] != null)
-                dgv_TablaFamilia.Columns["ID_Familia"].HeaderText = "ID_Familia";
-            if (dgv_TablaFamilia.Columns["ID_Usuario"] != null)
-                dgv_TablaFamilia.Columns["ID_Usuario"].HeaderText = "ID_Usuario";
-
-            dgv_TablaFamilia.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv_TablaFamilia.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_TablaFamilia.MultiSelect = false;
-            dgv_TablaFamilia.ReadOnly = true;
-        }
-
         private void btn_AgregarFamilia_Click(object sender, EventArgs e)
         {
             try
@@ -47,9 +31,7 @@ namespace Capa_Vista
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            formPanelAdmin formPanelAdmin = new formPanelAdmin();
-            formPanelAdmin.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void dgv_TablaFamilia_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -68,6 +50,22 @@ namespace Capa_Vista
             /// PARA PODER CAMBIAR EL NOMBRE DEL BOTON CUANDO SE SELECCIONA UNA FAMILIA, NECESITO EVIDENTEMENTE EL NOMBRE DE DICHA FAMILIA
             /// ACTUALMENTE LA TABLA FamiliaUsuarios_Comp SOLO TIENE ID_Familia e ID_Usuario + razon (irrelevante a menos que se añada un textbox para añadir dicha razon)
             /// NECESITO O UN SP QUE JUNTE LAS TABLAS Familia + Usuarios O QUE SE CAMBIE LA TABLA FamiliaUsuarios_Comp PARA CONTENER DICHOS DATOS
+        }
+
+        private void CargarListaFamiliaUsuario()
+        {
+            dgv_TablaFamilia.DataSource = claseSP.SP_ObtenerFamiliasFaltantesUsuario(claseVar.idUsuario);
+
+            // El ID viaja en la tabla para identificar la fila seleccionada, pero no se muestra
+            if (dgv_TablaFamilia.Columns["ID_Familia"] != null)
+                dgv_TablaFamilia.Columns["ID_Familia"].HeaderText = "ID_Familia";
+            if (dgv_TablaFamilia.Columns["Nombre"] != null)
+                dgv_TablaFamilia.Columns["Nombre"].HeaderText = "Nombre";
+
+            dgv_TablaFamilia.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_TablaFamilia.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_TablaFamilia.MultiSelect = false;
+            dgv_TablaFamilia.ReadOnly = true;
         }
     }
 }

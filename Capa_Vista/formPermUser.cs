@@ -32,9 +32,7 @@ namespace Capa_Vista
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            formPanelAdmin formPanelAdmin = new formPanelAdmin();
-            formPanelAdmin.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void dgv_TablaPermisos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -56,13 +54,13 @@ namespace Capa_Vista
         }
         private void CargarListaPermisoUsuario()
         {
-            //dgv_TablaPermisos.DataSource = //SP_CargaRolesUsuarios FALTANTE//
+            dgv_TablaPermisos.DataSource = claseSP.SP_ObtenerPermisosFaltantesUsuario(claseVar.idUsuario);
 
             // El ID viaja en la tabla para identificar la fila seleccionada, pero no se muestra
             if (dgv_TablaPermisos.Columns["ID_Permiso"] != null)
                 dgv_TablaPermisos.Columns["ID_Permiso"].HeaderText = "ID_Permiso";
-            if (dgv_TablaPermisos.Columns["ID_Usuario"] != null)
-                dgv_TablaPermisos.Columns["ID_Usuario"].HeaderText = "ID_Usuario";
+            if (dgv_TablaPermisos.Columns["Permiso"] != null)
+                dgv_TablaPermisos.Columns["Permiso"].HeaderText = "Nombre de Permiso";
 
             dgv_TablaPermisos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_TablaPermisos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

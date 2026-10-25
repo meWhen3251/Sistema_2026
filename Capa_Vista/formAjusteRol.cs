@@ -6,6 +6,7 @@ namespace Capa_Vista
     {
         claseSP claseSP = new claseSP();
         string rolSeleccionado;
+        int idRolSeleccionado;
         public formAjusteRol()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Capa_Vista
             }
             try
             {
+                idRolSeleccionado = Convert.ToInt32(dgv_Roles.SelectedRows[0].Cells["ID_Rol"].Value);
                 rolSeleccionado = Convert.ToString(dgv_Roles.SelectedRows[0].Cells["Nombre"].Value);
 
                 tbox_RolSeleccionado.Text = rolSeleccionado;
@@ -34,11 +36,6 @@ namespace Capa_Vista
                 MessageBox.Show("Error al seleccionar pregunta: " + ex.Message);
             }
         }
-
-        private void btn_EliminarRol_Click(object sender, EventArgs e)
-        {
-            ///HACER SABER SI ES NECESARIO O NO
-        }
         private void btn_ActualizarRol_Click(object sender, EventArgs e)
         {
             if (tbox_RolModificado.Text == "")
@@ -48,9 +45,9 @@ namespace Capa_Vista
             }
             try
             {
-                claseSP.SP_ModificarRol(Convert.ToInt32(dgv_Roles.SelectedRows[0].Cells["ID_Rol"]), tbox_RolModificado.Text);
+                claseSP.SP_ModificarRol(idRolSeleccionado, tbox_RolModificado.Text);
                 CargarListaRoles();
-                MessageBox.Show("Pregunta actualizada con exito.");
+                MessageBox.Show("Rol modificado con exito.");
                 tbox_RolModificado.Text = "";
                 tbox_RolSeleccionado.Text = "";
             }
@@ -81,9 +78,7 @@ namespace Capa_Vista
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            formPanelAdmin formPanelAdmin = new formPanelAdmin();
-            formPanelAdmin.Show();
-            this.Hide();
+            this.Close();
         }
         private void CargarListaRoles()
         {
