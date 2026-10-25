@@ -34,5 +34,17 @@ namespace Capa_Logica
                 return sb.ToString(); // Resultado: string encriptado en SHA256 de 64 caracteres
             }
         }
+
+        // Las contraseñas temporales del sistema son siempre 6 dígitos. Ese formato no se permite
+        // al elegir una contraseña propia, por eso sirve para detectar que se entró con una temporal.
+        public static bool EsContrasenaTemporal(string contrasena)
+        {
+            if (contrasena.Length != 6) return false;
+            foreach (char c in contrasena)
+            {
+                if (c < '0' || c > '9') return false;
+            }
+            return true;
+        }
     }
 }
