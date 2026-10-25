@@ -129,11 +129,11 @@ BEGIN
 END
 GO
 
--- 5. Cargar roles para la listbox
+-- 5. Cargar todos los roles
 CREATE PROCEDURE SP_CargaRoles
 AS
 BEGIN
-    SELECT Nombre,Descripcion FROM Roles
+    SELECT ID_Rol,Nombre,Descripcion FROM Roles
 END
 GO
 
@@ -256,7 +256,7 @@ BEGIN
 END
 GO
 
--- ?. Cargar Roles y Usuarios (NUEVO)
+-- ?. Devuelve los permisos faltantes para un usuario (NUEVO)
 CREATE PROCEDURE SP_ObtenerPermisosFaltantesUsuario
     @ID_Usuario INT
 AS
@@ -272,6 +272,45 @@ BEGIN
         SELECT PermisosUsuarios_Comp.ID_Permiso 
         FROM PermisosUsuarios_Comp 
         WHERE PermisosUsuarios_Comp.ID_Usuario = @ID_Usuario
+    );
+END
+GO
+
+-- ?. Devuelve los roles faltantes para un usuario (NUEVO)
+CREATE PROCEDURE SP_ObtenerRolesFaltantesUsuario
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        Roles.ID_Rol,
+        Roles.Nombre,
+        Roles.Descripcion
+    FROM Roles
+    WHERE Roles.ID_Rol NOT IN (
+        SELECT RolesUsuarios_Comp.ID_Rol 
+        FROM RolesUsuarios_Comp 
+        WHERE RolesUsuarios_Comp.ID_Usuario = @ID_Usuario
+    );
+END
+GO
+
+-- ?. Devuelve las familias faltantes que tiene un usuario (NUEVO)
+CREATE PROCEDURE SP_ObtenerFamiliasFaltantesUsuario
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        Familia.ID_Familia,
+        Familia.Nombre
+    FROM Familia
+    WHERE Familia.ID_Familia NOT IN (
+        SELECT FamiliaUsuarios_Comp.ID_Familia 
+         FROM FamiliaUsuarios_Comp
+         WHERE FamiliaUsuarios_Comp.ID_Usuario = @ID_Usuario
     );
 END
 GO
@@ -658,29 +697,19 @@ END
 GO
 
 -- 21. Asociar roles con usuarios
+
 CREATE PROCEDURE SP_AgregarRolUsuario
-    @Rol VARCHAR(50),
-    @User VARCHAR(50)
+    @ID_Rol INT,
+    @ID_Usuario INT
 AS
 BEGIN
-    IF NOT EXISTS (SELECT * FROM Roles
-    INNER JOIN RolesUsuarios_Comp ON Roles.ID_Rol = RolesUsuarios_Comp.ID_Rol
-    INNER JOIN Usuarios ON RolesUsuarios_Comp.ID_Usuario = Usuarios.ID_Usuario
-    WHERE Roles.Nombre = @Rol AND Usuarios.Nombre=@User)
-        BEGIN
-            BEGIN TRANSACTION
-
-            DECLARE @ID_Rol INT = (SELECT ID_Rol FROM Roles WHERE Nombre = @Rol)
-            DECLARE @ID_Usuario INT = (SELECT ID_Usuario FROM Usuarios WHERE Nombre=@User)
-                INSERT INTO RolesUsuarios_Comp (ID_Rol, ID_Usuario)
-                VALUES (@ID_Rol, @ID_Usuario)
-            COMMIT TRANSACTION
-        END
-    ELSE
+    IF NOT EXISTS (SELECT * FROM RolesUsuarios_Comp WHERE ID_Rol = @ID_Rol AND ID_Usuario = @ID_Usuario)
     BEGIN
-            RAISERROR('El usuario ya tiene asignado el rol.', 16, 1)
-            RETURN
-        END
+        BEGIN TRANSACTION
+        INSERT INTO RolesUsuarios_Comp (ID_Rol, ID_Usuario)
+        VALUES (@ID_Rol,@ID_Usuario)
+        COMMIT TRANSACTION
+    END
 END
 GO
 
