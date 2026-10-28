@@ -33,7 +33,7 @@ namespace Capa_Vista
         {
             flp_InformacionUsuario.Controls.Clear();
 
-            DataTable dtUsuario = claseSP.SP_ObtenerDatosUsuario(claseVar.idUsuario);
+            DataTable dtUsuario = claseSP.SP_ObtenerDatosUsuario(claseVar.idUsuarioSeleccionado);
 
             if (dtUsuario == null || dtUsuario.Rows.Count == 0)
             {
@@ -92,24 +92,24 @@ namespace Capa_Vista
 
         private void CargarRoles()
         {
-            CargarLista(lbox_Roles, claseSP.SP_ObtenerRolesDeUsuario(claseVar.idUsuario), "Nombre", "ID_Rol");
+            CargarLista(lbox_Roles, claseSP.SP_ObtenerRolesDeUsuario(claseVar.idUsuarioSeleccionado), "Nombre", "ID_Rol");
         }
 
         private void CargarFamilias()
         {
-            CargarLista(lbox_Familias, claseSP.SP_ObtenerFamiliasDeUsuario(claseVar.idUsuario), "Nombre", "ID_Familia");
+            CargarLista(lbox_Familias, claseSP.SP_ObtenerFamiliasDeUsuario(claseVar.idUsuarioSeleccionado), "Nombre", "ID_Familia");
         }
 
         private void CargarPermisos()
         {
-            CargarLista(lbox_Permisos, claseSP.SP_ObtenerPermisosDeUsuario(claseVar.idUsuario), "Permiso", "ID_Permiso");
+            CargarLista(lbox_Permisos, claseSP.SP_ObtenerPermisosDeUsuario(claseVar.idUsuarioSeleccionado), "Permiso", "ID_Permiso");
         }
 
         private void CargarPreguntasRespondidas()
         {
             lbox_PSRespondidas.Items.Clear();
 
-            DataTable preguntas = claseSP.SP_ObtenerPreguntasSeguridad(claseVar.idUsuario);
+            DataTable preguntas = claseSP.SP_ObtenerPreguntasSeguridad(claseVar.idUsuarioSeleccionado);
             foreach (DataRow row in preguntas.Rows)
             {
                 lbox_PSRespondidas.Items.Add(row["Pregunta"].ToString().Trim());
@@ -137,7 +137,7 @@ namespace Capa_Vista
 
             try
             {
-                claseSP.SP_QuitarAsignacionUsuario(tipo, id, claseVar.idUsuario);
+                claseSP.SP_QuitarAsignacionUsuario(tipo, id, claseVar.idUsuarioSeleccionado);
                 MessageBox.Show($"Se quitó \"{nombre}\" ({tipo.ToLower()}) del usuario.");
                 recargar();
             }
@@ -145,6 +145,20 @@ namespace Capa_Vista
             {
                 MessageBox.Show("Error al quitar: " + ex.Message);
             }
+        }
+
+        // =================================================================================//
+        //  Abre los respectivos formularios y, al volver, recarga la lista correspondiente
+        // =================================================================================//
+        private void AbrirSelector(Form selector, Action recargar)
+        {
+            selector.FormClosed += (s, args) =>
+            {
+                recargar();
+                this.Show();
+            };
+            this.Hide();
+            selector.Show();
         }
 
         private void btn_QuitarRol_Click(object sender, EventArgs e)
@@ -162,20 +176,6 @@ namespace Capa_Vista
             QuitarAsignacion(lbox_Permisos, "Permiso", "ID_Permiso", "Permiso", CargarPermisos);
         }
 
-        // =================================================================================//
-        //  Abre los respectivos formularios y, al volver, recarga la lista correspondiente
-        // =================================================================================//
-        private void AbrirSelector(Form selector, Action recargar)
-        {
-            selector.FormClosed += (s, args) =>
-            {
-                recargar();
-                this.Show();
-            };
-            this.Hide();
-            selector.Show();
-        }
-
         private void btn_AgregarRol_Click(object sender, EventArgs e)
         {
             AbrirSelector(new formRolUser(), CargarRoles);
@@ -190,10 +190,28 @@ namespace Capa_Vista
         {
             AbrirSelector(new formPermUser(), CargarPermisos);
         }
+        private void btn_ModificarDatos_Click(object sender, EventArgs e)
+        {
+            var formModificarDatos = new formModificarDatos();
+            formModificarDatos.FormClosed += (s, args) =>
+            {
+                CargarDatosUsuario();
+                this.Show();
+            };
+            this.Hide();
+            formModificarDatos.Show();
+        }
 
         private async void btn_SolicitarNuevaPass_Click(object sender, EventArgs e)
         {
-            DataTable datos = claseSP.SP_ObtenerDatosUsuario(claseVar.idUsuario);
+            int cantidad = Convert.ToInt32(claseSP.SP_ObtenerCantidadContrasenas(claseVar.idUsuarioSeleccionado).Rows[0]["CantidadContrasenas"]);
+            if (cantidad == 1)
+            {
+                MessageBox.Show("Este usuario todavía no hizo su primer ingreso: ya tiene una contraseña temporal pendiente.");
+                return;
+            }
+
+            DataTable datos = claseSP.SP_ObtenerDatosUsuario(claseVar.idUsuarioSeleccionado);
             if (datos.Rows.Count == 0)
             {
                 MessageBox.Show("No se encontró el usuario seleccionado.");
@@ -203,7 +221,7 @@ namespace Capa_Vista
             string usuario = datos.Rows[0]["NombreUsuario"].ToString().Trim();
             string correo = datos.Rows[0]["Correo"].ToString().Trim();
 
-            if (MessageBox.Show($"Se generará una contraseña temporal y se enviará a {correo}.\n¿Continuar?",
+            if (MessageBox.Show("Se generará una contraseña temporal y se enviará a "+ correo + "¿Continuar?",
                     "Solicitar nueva contraseña", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
@@ -218,7 +236,7 @@ namespace Capa_Vista
 
                 // Primero el correo: si falla, la contraseña actual del usuario no se toca
                 await claseEmail.sendEmailContraseña(usuario, correo, temporal);
-                claseSP.SP_GuardarContrasena(hash, claseVar.idUsuario, validarHistorial: false);
+                claseSP.SP_GuardarContrasena(hash, claseVar.idUsuarioSeleccionado, validarHistorial: false);
 
                 MessageBox.Show($"Se envió una contraseña temporal a {correo}.");
                 CargarDatosUsuario();
@@ -235,6 +253,42 @@ namespace Capa_Vista
         private void btn_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_Eliminar_Click(object sender, EventArgs e)
+        {
+            // El administrador no puede eliminarse a sí mismo
+            if (claseVar.idUsuarioSeleccionado == claseVar.idUsuario)
+            {
+                MessageBox.Show("No podés eliminar tu propio usuario.");
+                return;
+            }
+
+            string usuario = claseVar.nombreUsuarioSeleccionado;
+
+            DialogResult respuesta = MessageBox.Show(
+                "¿Eliminar al usuario " +usuario + "?. Se borrarán sus datos, contraseñas, roles, permisos y familias. Esta acción no se puede deshacer.",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (respuesta != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                claseSP.SP_EliminarUsuario(claseVar.idUsuarioSeleccionado);
+                MessageBox.Show($"Usuario: " + usuario + " eliminado correctamente.");
+                this.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el usuario: " + ex.Message);
+            }
+
         }
     }
 }

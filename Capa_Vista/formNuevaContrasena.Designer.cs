@@ -93,6 +93,7 @@
             Controls.Add(lbl_NuevaContra);
             Controls.Add(lbl_Bienvenida);
             Name = "formNuevaContrasena";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "formNuevaContrasena";
             ResumeLayout(false);
             PerformLayout();

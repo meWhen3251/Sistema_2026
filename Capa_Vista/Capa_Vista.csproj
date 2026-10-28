@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="formAjusteUsuario.cs~RF60a64f.TMP" />
+    <None Remove="formAjusteUsuario.cs~RF75daa7.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Capa_Datos\Capa_Datos.csproj" />
     <ProjectReference Include="..\Capa_Logica\Capa_Logica.csproj" />
     <ProjectReference Include="..\Capa_Servicios\Capa_Servicios.csproj" />

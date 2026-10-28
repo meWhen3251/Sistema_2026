@@ -92,9 +92,10 @@ namespace Capa_Vista
             lbl_RSeguridad.Visible = true;
             flp_PSeguridad.Visible = true;
             btn_EnviarCodigo.Visible = true;
+            lbl_RSeguridad.Visible = true;
 
             btn_Enviar.Enabled = false;
-            tbox_Correo.Enabled = false;
+            tbox_Correo.ReadOnly = true;
         }
 
         private async void btn_EnviarCodigo_Click(object sender, EventArgs e)

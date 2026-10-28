@@ -67,6 +67,7 @@
             lbl_RSeguridad.Size = new Size(168, 15);
             lbl_RSeguridad.TabIndex = 2;
             lbl_RSeguridad.Text = "Respuestas de Seguridad";
+            lbl_RSeguridad.Visible = false;
             // 
             // tbox_Correo
             // 
@@ -101,6 +102,7 @@
             btn_EnviarCodigo.TabIndex = 1;
             btn_EnviarCodigo.Text = "Enviar";
             btn_EnviarCodigo.UseVisualStyleBackColor = true;
+            btn_EnviarCodigo.Visible = false;
             btn_EnviarCodigo.Click += btn_EnviarCodigo_Click;
             // 
             // btn_Volver
@@ -127,6 +129,7 @@
             Controls.Add(lbl_Correo);
             Controls.Add(lbl_Bienvenida);
             Name = "formRecuperarContrasena";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "formRecuperar";
             ResumeLayout(false);
             PerformLayout();

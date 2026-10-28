@@ -18,16 +18,26 @@ namespace Capa_Vista
 
         private void btn_AgregarRol_Click(object sender, EventArgs e)
         {
+            if (dgv_TablasRoles.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, seleccioná un rol de la lista.");
+                return;
+            }
+
             try
             {
                 int idRol = Convert.ToInt32(dgv_TablasRoles.SelectedRows[0].Cells["ID_Rol"].Value);
-                claseSP.SP_AgregarRolUsuario(idRol, claseVar.idUsuario);
+                string rol = Convert.ToString(dgv_TablasRoles.SelectedRows[0].Cells["Nombre"].Value).Trim();
+
+                claseSP.SP_AgregarRolUsuario(idRol, claseVar.idUsuarioSeleccionado);
+
+                MessageBox.Show($"Rol \"{rol}\" agregado al usuario con éxito.");
                 CargarListaRolesUsuario();
-                MessageBox.Show("Usuario agregado a la familia con exito");
+                btn_AgregarRol.Text = "Agregar rol (nombre de rol)";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al vincular familia: " + ex.Message);
+                MessageBox.Show("Error al agregar el rol: " + ex.Message);
             }
         }
 
@@ -39,29 +49,19 @@ namespace Capa_Vista
 
         private void dgv_TablasRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex >= 0)
-            //{
-            //    DataGridViewRow row = dgv_TablaFamilia.Rows[e.RowIndex];
+            if (e.RowIndex < 0) return;
 
-            //    if (row.Cells[0].Value != null)
-            //    {
-            //    }
-            //    else
-            //    {
-            //    }
-            //}
-            ///PARA PODER CAMBIAR EL NOMBRE DEL BOTON CUANDO SE SELECCIONA UNA ROL, NECESITO EVIDENTEMENTE EL NOMBRE DE DICHO ROL
-            /// ACTUALMENTE LA TABLA RolesUsuarios_Comp SOLO TIENE ID_Rol e ID_Usuario + razon (irrelevante a menos que se añada un textbox para añadir dicha razon)
-            /// NECESITO O UN SP QUE JUNTE LAS TABLAS Roles + Usuarios O QUE SE CAMBIE LA TABLA RolesUsuarios_Comp PARA CONTENER DICHOS DATOS
+            string rol = Convert.ToString(dgv_TablasRoles.Rows[e.RowIndex].Cells["Nombre"].Value).Trim();
+            btn_AgregarRol.Text = "Agregar rol (" + rol + ")";
         }
 
         private void CargarListaRolesUsuario()
-        {
-            dgv_TablasRoles.DataSource = claseSP.SP_ObtenerRolesFaltantesUsuario(claseVar.idUsuario);
-
+        { 
             // El ID viaja en la tabla para identificar la fila seleccionada, pero no se muestra
+            dgv_TablasRoles.DataSource = claseSP.SP_ObtenerRolesFaltantesUsuario(claseVar.idUsuarioSeleccionado);
+
             if (dgv_TablasRoles.Columns["ID_Rol"] != null)
-                dgv_TablasRoles.Columns["ID_Rol"].HeaderText = "ID_Rol";
+                dgv_TablasRoles.Columns["ID_Rol"].Visible = false;
             if (dgv_TablasRoles.Columns["Nombre"] != null)
                 dgv_TablasRoles.Columns["Nombre"].HeaderText = "Nombre";
 

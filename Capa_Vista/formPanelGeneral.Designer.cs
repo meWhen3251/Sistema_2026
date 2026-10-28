@@ -33,21 +33,13 @@
             lbl_Bienvenida = new Label();
             lbl_Rol = new Label();
             btn_CerrarSesion = new Button();
+            btn_CambiarPreguntas = new Button();
+            lbl_Usuario = new Label();
             SuspendLayout();
-            // 
-            // btn_CambiarContra
-            // 
-            btn_CambiarContra.Location = new Point(136, 126);
-            btn_CambiarContra.Name = "btn_CambiarContra";
-            btn_CambiarContra.Size = new Size(165, 38);
-            btn_CambiarContra.TabIndex = 0;
-            btn_CambiarContra.Text = "Cambiar contraseña";
-            btn_CambiarContra.UseVisualStyleBackColor = true;
-            btn_CambiarContra.Click += btn_CambiarContra_Click;
             // 
             // btn_GestionUsuarios
             // 
-            btn_GestionUsuarios.Location = new Point(136, 187);
+            btn_GestionUsuarios.Location = new Point(109, 190);
             btn_GestionUsuarios.Name = "btn_GestionUsuarios";
             btn_GestionUsuarios.Size = new Size(165, 38);
             btn_GestionUsuarios.TabIndex = 1;
@@ -55,11 +47,21 @@
             btn_GestionUsuarios.UseVisualStyleBackColor = true;
             btn_GestionUsuarios.Click += btn_GestionUsuarios_Click;
             // 
+            // btn_CambiarContra
+            // 
+            btn_CambiarContra.Location = new Point(109, 102);
+            btn_CambiarContra.Name = "btn_CambiarContra";
+            btn_CambiarContra.Size = new Size(165, 38);
+            btn_CambiarContra.TabIndex = 0;
+            btn_CambiarContra.Text = "Cambiar contraseña";
+            btn_CambiarContra.UseVisualStyleBackColor = true;
+            btn_CambiarContra.Click += btn_CambiarContra_Click;
+            // 
             // lbl_Bienvenida
             // 
             lbl_Bienvenida.AutoSize = true;
             lbl_Bienvenida.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
-            lbl_Bienvenida.Location = new Point(136, 48);
+            lbl_Bienvenida.Location = new Point(109, 9);
             lbl_Bienvenida.Name = "lbl_Bienvenida";
             lbl_Bienvenida.Size = new Size(166, 24);
             lbl_Bienvenida.TabIndex = 2;
@@ -68,7 +70,7 @@
             // lbl_Rol
             // 
             lbl_Rol.AutoSize = true;
-            lbl_Rol.Location = new Point(12, 309);
+            lbl_Rol.Location = new Point(12, 311);
             lbl_Rol.Name = "lbl_Rol";
             lbl_Rol.Size = new Size(38, 15);
             lbl_Rol.TabIndex = 3;
@@ -76,7 +78,7 @@
             // 
             // btn_CerrarSesion
             // 
-            btn_CerrarSesion.Location = new Point(347, 284);
+            btn_CerrarSesion.Location = new Point(291, 284);
             btn_CerrarSesion.Name = "btn_CerrarSesion";
             btn_CerrarSesion.Size = new Size(75, 40);
             btn_CerrarSesion.TabIndex = 4;
@@ -84,17 +86,39 @@
             btn_CerrarSesion.UseVisualStyleBackColor = true;
             btn_CerrarSesion.Click += btn_CerrarSesion_Click;
             // 
+            // btn_CambiarPreguntas
+            // 
+            btn_CambiarPreguntas.Location = new Point(109, 146);
+            btn_CambiarPreguntas.Name = "btn_CambiarPreguntas";
+            btn_CambiarPreguntas.Size = new Size(165, 38);
+            btn_CambiarPreguntas.TabIndex = 5;
+            btn_CambiarPreguntas.Text = "Cambiar preguntas de seguridad";
+            btn_CambiarPreguntas.UseVisualStyleBackColor = true;
+            btn_CambiarPreguntas.Click += btn_CambiarPreguntas_Click;
+            // 
+            // lbl_Usuario
+            // 
+            lbl_Usuario.AutoSize = true;
+            lbl_Usuario.Location = new Point(12, 284);
+            lbl_Usuario.Name = "lbl_Usuario";
+            lbl_Usuario.Size = new Size(38, 15);
+            lbl_Usuario.TabIndex = 6;
+            lbl_Usuario.Text = "label1";
+            // 
             // formPanelGeneral
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(434, 335);
+            ClientSize = new Size(380, 335);
+            Controls.Add(lbl_Usuario);
+            Controls.Add(btn_CambiarPreguntas);
             Controls.Add(btn_CerrarSesion);
             Controls.Add(lbl_Rol);
             Controls.Add(lbl_Bienvenida);
             Controls.Add(btn_GestionUsuarios);
             Controls.Add(btn_CambiarContra);
             Name = "formPanelGeneral";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "formPanelGeneral";
             Load += formPanelGeneral_Load;
             ResumeLayout(false);
@@ -108,5 +132,7 @@
         private Label lbl_Bienvenida;
         private Label lbl_Rol;
         private Button btn_CerrarSesion;
+        private Button btn_CambiarPreguntas;
+        private Label lbl_Usuario;
     }
 }

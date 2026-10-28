@@ -11,7 +11,6 @@ namespace Capa_Vista
     public partial class formLogin : Form
     {
         claseSP claseSP = new claseSP();
-        claseMetodos claseMetodos = new claseMetodos();
         public formLogin()
         {
             InitializeComponent();

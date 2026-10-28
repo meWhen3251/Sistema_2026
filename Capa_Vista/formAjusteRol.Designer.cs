@@ -156,6 +156,7 @@
             Controls.Add(label1);
             Controls.Add(dgv_Roles);
             Name = "formAjusteRol";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormAjusteRol";
             Load += formAjusteRol_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_Roles).EndInit();

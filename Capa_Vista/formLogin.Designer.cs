@@ -37,15 +37,15 @@
             btn_Login = new Button();
             SuspendLayout();
             // 
-            // lbl_Contrasena
+            // lbl_Bievenida
             // 
-            lbl_Contrasena.AutoSize = true;
-            lbl_Contrasena.Font = new Font("Consolas", 9F);
-            lbl_Contrasena.Location = new Point(304, 170);
-            lbl_Contrasena.Name = "lbl_Contrasena";
-            lbl_Contrasena.Size = new Size(77, 14);
-            lbl_Contrasena.TabIndex = 13;
-            lbl_Contrasena.Text = "Contraseña";
+            lbl_Bievenida.AutoSize = true;
+            lbl_Bievenida.Font = new Font("Consolas", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Bievenida.Location = new Point(161, 50);
+            lbl_Bievenida.Name = "lbl_Bievenida";
+            lbl_Bievenida.Size = new Size(370, 24);
+            lbl_Bievenida.TabIndex = 7;
+            lbl_Bievenida.Text = "Login con usuario y contraseña";
             // 
             // lbl_Usuario
             // 
@@ -56,6 +56,16 @@
             lbl_Usuario.Size = new Size(126, 14);
             lbl_Usuario.TabIndex = 12;
             lbl_Usuario.Text = "Nombre de Usuario";
+            // 
+            // lbl_Contrasena
+            // 
+            lbl_Contrasena.AutoSize = true;
+            lbl_Contrasena.Font = new Font("Consolas", 9F);
+            lbl_Contrasena.Location = new Point(304, 170);
+            lbl_Contrasena.Name = "lbl_Contrasena";
+            lbl_Contrasena.Size = new Size(77, 14);
+            lbl_Contrasena.TabIndex = 13;
+            lbl_Contrasena.Text = "Contraseña";
             // 
             // Llabel_Recuperar
             // 
@@ -68,19 +78,19 @@
             Llabel_Recuperar.Text = "Olvidaste tu contraseña? Click aqui para recuperarla.";
             Llabel_Recuperar.LinkClicked += Llabel_Recuperar_LinkClicked;
             // 
-            // tbox_Contrasena
-            // 
-            tbox_Contrasena.Location = new Point(224, 187);
-            tbox_Contrasena.Name = "tbox_Contrasena";
-            tbox_Contrasena.Size = new Size(248, 23);
-            tbox_Contrasena.TabIndex = 10;
-            // 
             // tbox_Usuario
             // 
             tbox_Usuario.Location = new Point(224, 138);
             tbox_Usuario.Name = "tbox_Usuario";
             tbox_Usuario.Size = new Size(248, 23);
             tbox_Usuario.TabIndex = 9;
+            // 
+            // tbox_Contrasena
+            // 
+            tbox_Contrasena.Location = new Point(224, 187);
+            tbox_Contrasena.Name = "tbox_Contrasena";
+            tbox_Contrasena.Size = new Size(248, 23);
+            tbox_Contrasena.TabIndex = 10;
             // 
             // btn_Login
             // 
@@ -92,21 +102,11 @@
             btn_Login.UseVisualStyleBackColor = true;
             btn_Login.Click += btn_Login_Click;
             // 
-            // lbl_Bienvenida
-            // 
-            lbl_Bievenida.AutoSize = true;
-            lbl_Bievenida.Font = new Font("Consolas", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Bievenida.Location = new Point(161, 50);
-            lbl_Bievenida.Name = "lbl_Bienvenida";
-            lbl_Bievenida.Size = new Size(370, 24);
-            lbl_Bievenida.TabIndex = 7;
-            lbl_Bievenida.Text = "Login con usuario y contraseña";
-            // 
             // formLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(678, 407);
+            ClientSize = new Size(678, 357);
             Controls.Add(lbl_Contrasena);
             Controls.Add(lbl_Usuario);
             Controls.Add(Llabel_Recuperar);
@@ -115,6 +115,7 @@
             Controls.Add(btn_Login);
             Controls.Add(lbl_Bievenida);
             Name = "formLogin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += formLogin_Load;
             ResumeLayout(false);

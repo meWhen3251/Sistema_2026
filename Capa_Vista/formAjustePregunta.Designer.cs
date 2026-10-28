@@ -125,7 +125,7 @@
             // 
             // btn_ActualizarPregunta
             // 
-            btn_ActualizarPregunta.Location = new Point(348, 396);
+            btn_ActualizarPregunta.Location = new Point(339, 396);
             btn_ActualizarPregunta.Name = "btn_ActualizarPregunta";
             btn_ActualizarPregunta.Size = new Size(157, 23);
             btn_ActualizarPregunta.TabIndex = 9;
@@ -150,7 +150,7 @@
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
             // 
-            // FormAjustePregunta
+            // formAjustePregunta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -167,7 +167,8 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "FormAjustePregunta";
+            Name = "formAjustePregunta";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormAjustePregunta";
             Load += formAjustePregunta_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_PreguntasS).EndInit();

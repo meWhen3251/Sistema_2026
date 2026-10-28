@@ -15,6 +15,14 @@ namespace Capa_Vista
         {
             CargarListaUsuarios();
         }
+        private void btn_RegistrarUsuario_Click(object sender, EventArgs e)
+        {
+            var formNuevoUsuario = new formNuevoUsuario();
+            formNuevoUsuario.FormClosed += (s, args) => { this.Show(); CargarListaUsuarios(); };
+            formNuevoUsuario.Show();
+            this.Hide();
+        }
+
         private void btn_AjusteUserSelect_Click(object sender, EventArgs e)
         {
             if (dgv_ListaUsuarios.SelectedRows.Count == 0)
@@ -23,8 +31,8 @@ namespace Capa_Vista
                 return;
             }
 
-            claseVar.idUsuario = Convert.ToInt32(dgv_ListaUsuarios.SelectedRows[0].Cells["ID_Usuario"].Value);
-            claseVar.nombreUsuario = Convert.ToString(dgv_ListaUsuarios.SelectedRows[0].Cells["NombreUsuario"].Value);
+            claseVar.idUsuarioSeleccionado = Convert.ToInt32(dgv_ListaUsuarios.SelectedRows[0].Cells["ID_Usuario"].Value);
+            claseVar.nombreUsuarioSeleccionado = Convert.ToString(dgv_ListaUsuarios.SelectedRows[0].Cells["NombreUsuario"].Value);
 
             var formAjuste = new formAjusteUsuario();
             formAjuste.FormClosed += (s, args) => { this.Show(); CargarListaUsuarios(); };
@@ -50,7 +58,10 @@ namespace Capa_Vista
 
         private void btn_ConfigSistema_Click(object sender, EventArgs e)
         {
-
+            var formConfiguraciones = new formConfiguraciones();
+            formConfiguraciones.FormClosed += (s, args) => this.Show();
+            formConfiguraciones.Show();
+            this.Hide();
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
@@ -65,7 +76,7 @@ namespace Capa_Vista
 
             // El ID viaja en la tabla para identificar la fila seleccionada, pero no se muestra
             if (dgv_ListaUsuarios.Columns["ID_Usuario"] != null)
-                dgv_ListaUsuarios.Columns["ID_Usuario"].Visible = false;
+                dgv_ListaUsuarios.Columns["ID_Usuario"].HeaderText = "ID";
             if (dgv_ListaUsuarios.Columns["NombreUsuario"] != null)
                 dgv_ListaUsuarios.Columns["NombreUsuario"].HeaderText = "Usuario";
             if (dgv_ListaUsuarios.Columns["Nombre"] != null)

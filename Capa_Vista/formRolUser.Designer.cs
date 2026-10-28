@@ -83,6 +83,7 @@
             Controls.Add(dgv_TablasRoles);
             Controls.Add(label1);
             Name = "formRolUser";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormRolUser";
             Load += formRolUser_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_TablasRoles).EndInit();

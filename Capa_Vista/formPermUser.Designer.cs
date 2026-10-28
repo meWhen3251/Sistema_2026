@@ -83,6 +83,7 @@
             Controls.Add(dgv_TablaPermisos);
             Controls.Add(label1);
             Name = "formPermUser";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "formPermUser";
             Load += formPermUser_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_TablaPermisos).EndInit();

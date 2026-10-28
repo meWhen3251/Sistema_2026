@@ -38,26 +38,16 @@
             flp_PreguntasSeg = new FlowLayoutPanel();
             SuspendLayout();
             // 
-            // lbl_FormPrimerContra
+            // lbl_BievenidaForm
             // 
             lbl_BievenidaForm.AutoSize = true;
             lbl_BievenidaForm.Font = new Font("Consolas", 15.75F, FontStyle.Bold);
             lbl_BievenidaForm.Location = new Point(274, 19);
-            lbl_BievenidaForm.Name = "lbl_FormPrimerContra";
+            lbl_BievenidaForm.Name = "lbl_BievenidaForm";
             lbl_BievenidaForm.Size = new Size(478, 48);
             lbl_BievenidaForm.TabIndex = 0;
             lbl_BievenidaForm.Text = "Cambio y primer registro de contraseña \r\npor el usuario";
             lbl_BievenidaForm.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lbl_RepetirPass
-            // 
-            lbl_RepetirPass.AutoSize = true;
-            lbl_RepetirPass.Font = new Font("Consolas", 9.75F);
-            lbl_RepetirPass.Location = new Point(12, 113);
-            lbl_RepetirPass.Name = "lbl_RepetirPass";
-            lbl_RepetirPass.Size = new Size(133, 15);
-            lbl_RepetirPass.TabIndex = 1;
-            lbl_RepetirPass.Text = "Repetir contraseña";
             // 
             // lbl_NuevaPass
             // 
@@ -69,12 +59,15 @@
             lbl_NuevaPass.TabIndex = 2;
             lbl_NuevaPass.Text = "Nueva contraseña";
             // 
-            // tbox_Contrasena
+            // lbl_RepetirPass
             // 
-            tbox_Contrasena.Location = new Point(12, 87);
-            tbox_Contrasena.Name = "tbox_Contrasena";
-            tbox_Contrasena.Size = new Size(200, 23);
-            tbox_Contrasena.TabIndex = 3;
+            lbl_RepetirPass.AutoSize = true;
+            lbl_RepetirPass.Font = new Font("Consolas", 9.75F);
+            lbl_RepetirPass.Location = new Point(12, 113);
+            lbl_RepetirPass.Name = "lbl_RepetirPass";
+            lbl_RepetirPass.Size = new Size(133, 15);
+            lbl_RepetirPass.TabIndex = 1;
+            lbl_RepetirPass.Text = "Repetir contraseña";
             // 
             // tbox_RepetirContra
             // 
@@ -82,6 +75,13 @@
             tbox_RepetirContra.Name = "tbox_RepetirContra";
             tbox_RepetirContra.Size = new Size(200, 23);
             tbox_RepetirContra.TabIndex = 4;
+            // 
+            // tbox_Contrasena
+            // 
+            tbox_Contrasena.Location = new Point(12, 87);
+            tbox_Contrasena.Name = "tbox_Contrasena";
+            tbox_Contrasena.Size = new Size(200, 23);
+            tbox_Contrasena.TabIndex = 3;
             // 
             // btn_Enviar
             // 
@@ -125,6 +125,7 @@
             Controls.Add(lbl_RepetirPass);
             Controls.Add(lbl_BievenidaForm);
             Name = "formFirstLogin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += formFirstLogin_Load;
             ResumeLayout(false);

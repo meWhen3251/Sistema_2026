@@ -83,6 +83,7 @@
             Controls.Add(dgv_TablaFamilia);
             Controls.Add(label1);
             Name = "formFamUser";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormFamUser";
             Load += formFamUser_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_TablaFamilia).EndInit();

@@ -36,6 +36,7 @@
             btn_AjusteRoles = new Button();
             btn_AjusteUserSelect = new Button();
             btn_Volver = new Button();
+            btn_RegistrarUsuario = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_ListaUsuarios).BeginInit();
             SuspendLayout();
             // 
@@ -73,16 +74,17 @@
             // 
             // btn_ConfigSistema
             // 
-            btn_ConfigSistema.Location = new Point(604, 317);
+            btn_ConfigSistema.Location = new Point(655, 317);
             btn_ConfigSistema.Name = "btn_ConfigSistema";
             btn_ConfigSistema.Size = new Size(113, 41);
             btn_ConfigSistema.TabIndex = 7;
             btn_ConfigSistema.Text = "Configuraciones del sistema";
             btn_ConfigSistema.UseVisualStyleBackColor = true;
+            btn_ConfigSistema.Click += btn_ConfigSistema_Click;
             // 
             // btn_AjustePreguntas
             // 
-            btn_AjustePreguntas.Location = new Point(427, 317);
+            btn_AjustePreguntas.Location = new Point(502, 317);
             btn_AjustePreguntas.Name = "btn_AjustePreguntas";
             btn_AjustePreguntas.Size = new Size(113, 41);
             btn_AjustePreguntas.TabIndex = 5;
@@ -92,7 +94,7 @@
             // 
             // btn_AjusteRoles
             // 
-            btn_AjusteRoles.Location = new Point(252, 317);
+            btn_AjusteRoles.Location = new Point(346, 317);
             btn_AjusteRoles.Name = "btn_AjusteRoles";
             btn_AjusteRoles.Size = new Size(113, 41);
             btn_AjusteRoles.TabIndex = 4;
@@ -102,7 +104,7 @@
             // 
             // btn_AjusteUserSelect
             // 
-            btn_AjusteUserSelect.Location = new Point(54, 317);
+            btn_AjusteUserSelect.Location = new Point(187, 317);
             btn_AjusteUserSelect.Name = "btn_AjusteUserSelect";
             btn_AjusteUserSelect.Size = new Size(121, 41);
             btn_AjusteUserSelect.TabIndex = 3;
@@ -120,11 +122,22 @@
             btn_Volver.UseVisualStyleBackColor = true;
             btn_Volver.Click += btn_Volver_Click;
             // 
+            // btn_RegistrarUsuario
+            // 
+            btn_RegistrarUsuario.Location = new Point(31, 317);
+            btn_RegistrarUsuario.Name = "btn_RegistrarUsuario";
+            btn_RegistrarUsuario.Size = new Size(121, 41);
+            btn_RegistrarUsuario.TabIndex = 9;
+            btn_RegistrarUsuario.Text = "Registrar un nuevo usuario";
+            btn_RegistrarUsuario.UseVisualStyleBackColor = true;
+            btn_RegistrarUsuario.Click += btn_RegistrarUsuario_Click;
+            // 
             // formPanelAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 445);
+            Controls.Add(btn_RegistrarUsuario);
             Controls.Add(btn_Volver);
             Controls.Add(btn_ConfigSistema);
             Controls.Add(btn_AjustePreguntas);
@@ -134,6 +147,7 @@
             Controls.Add(lbl_Bienvenida);
             Controls.Add(dgv_ListaUsuarios);
             Name = "formPanelAdmin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormPanelAdmin";
             Load += formPanelAdmin_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_ListaUsuarios).EndInit();
@@ -151,5 +165,6 @@
         private Button btn_AjusteRoles;
         private Button btn_AjusteUserSelect;
         private Button btn_Volver;
+        private Button btn_RegistrarUsuario;
     }
 }

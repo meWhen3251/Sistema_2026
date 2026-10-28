@@ -1,11 +1,13 @@
 ﻿using Capa_Datos;
+using Capa_Sesion;
+using System.Data;
 
 namespace Capa_Vista
 {
     public partial class formAjustePregunta : Form
     {
         claseSP claseSP = new claseSP();
-        string preguntaSeleccionada;
+        string preguntaSeleccionada = "";   // la pregunta que se está modificando ("" = ninguna elegida)
 
         public formAjustePregunta()
         {
@@ -14,9 +16,16 @@ namespace Capa_Vista
 
         private void formAjustePregunta_Load(object sender, EventArgs e)
         {
+            // Largo máximo = largo de la columna Pregunta de la base de datos
+            tbox_NuevaPregunta.MaxLength = 40;
+            tbox_PreguntaNueva.MaxLength = 40;
+
             CargaPreguntasSeguridad();
         }
 
+        // Elige la pregunta de la grilla para modificarla:
+        //   tbox_PreguntaAnterior (solo lectura) = la pregunta actual, de referencia
+        //   tbox_NuevaPregunta                   = la caja donde se escribe la pregunta modificada
         private void btn_ModificarPregunta_Click(object sender, EventArgs e)
         {
             if (dgv_PreguntasS.SelectedRows.Count == 0)
@@ -25,33 +34,38 @@ namespace Capa_Vista
                 return;
             }
 
-            try
-            {
-                preguntaSeleccionada = Convert.ToString(dgv_PreguntasS.SelectedRows[0].Cells["Pregunta"].Value);
+            claseTemp.preguntaSeleccionada = Convert.ToString(dgv_PreguntasS.SelectedRows[0].Cells["Pregunta"].Value).Trim();
 
-                tbox_PreguntaAnterior.Text = preguntaSeleccionada;
-
-                tbox_NuevaPregunta.Text = preguntaSeleccionada;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al seleccionar pregunta: " + ex.Message);
-            }
+            formModificarPregunta formModificarPregunta = new formModificarPregunta();
+            formModificarPregunta.FormClosed += (s, args) => this.Show();
+            formModificarPregunta.Show();
+            this.Hide();
         }
 
+        // Guarda la pregunta modificada (la que se eligió con "Modificar")
         private void btn_ActualizarPregunta_Click(object sender, EventArgs e)
         {
-            if (tbox_NuevaPregunta.Text == "")
+            if (preguntaSeleccionada == "")
+            {
+                MessageBox.Show("Primero seleccioná una pregunta y apretá 'Modificar pregunta seleccionada'.");
+                return;
+            }
+
+            string preguntaModificada = tbox_NuevaPregunta.Text.Trim();
+
+            if (preguntaModificada == "")
             {
                 MessageBox.Show("La nueva pregunta no puede estar vacia");
                 return;
             }
+
             try
             {
-                claseSP.SP_ModificarPreguntaSeguridad(tbox_NuevaPregunta.Text, preguntaSeleccionada);
+                claseSP.SP_ModificarPreguntaSeguridad(preguntaModificada, preguntaSeleccionada);
                 CargaPreguntasSeguridad();
                 MessageBox.Show("Pregunta actualizada con exito.");
+
+                preguntaSeleccionada = "";
                 tbox_PreguntaAnterior.Text = "";
                 tbox_NuevaPregunta.Text = "";
             }
@@ -61,19 +75,36 @@ namespace Capa_Vista
             }
         }
 
+        // Agrega una pregunta completamente nueva (se escribe en tbox_PreguntaNueva)
         private void btn_AgregarPregunta_Click(object sender, EventArgs e)
         {
-            if (tbox_NuevaPregunta.Text == "")
+            string preguntaNueva = tbox_PreguntaNueva.Text.Trim();
+
+            if (preguntaNueva == "")
             {
                 MessageBox.Show("La pregunta no puede estar vacia");
                 return;
             }
+
+            // No puede haber dos preguntas iguales
+            DataTable preguntasActuales = (DataTable)dgv_PreguntasS.DataSource; //(DataTable) es un 'Cast', que trata lo que sea que haya en
+                                                                                //.DataSource como un, en este caso, DataTable.
+                                                                                //Osea, el Cast es un conversor explicito de tipos
+            foreach (DataRow fila in preguntasActuales.Rows)
+            {
+                if (fila["Pregunta"].ToString().Trim().ToLower() == preguntaNueva.ToLower())
+                {
+                    MessageBox.Show("Esa pregunta ya existe.");
+                    return;
+                }
+            }
+
             try
             {
-                claseSP.SP_AgregarPreguntaSeguridad(tbox_NuevaPregunta.Text);
+                claseSP.SP_AgregarPreguntaSeguridad(preguntaNueva);
                 CargaPreguntasSeguridad();
                 MessageBox.Show("Pregunta agregada con exito");
-                tbox_NuevaPregunta.Text = "";
+                tbox_PreguntaNueva.Text = "";
             }
             catch (Exception ex)
             {
@@ -88,10 +119,11 @@ namespace Capa_Vista
                 MessageBox.Show("Por favor, seleccioná una pregunta de la lista.");
                 return;
             }
+
             try
             {
-                preguntaSeleccionada = Convert.ToString(dgv_PreguntasS.SelectedRows[0].Cells["Pregunta"].Value);
-                claseSP.SP_ActualizarEstadoPregunta(preguntaSeleccionada);
+                string pregunta = Convert.ToString(dgv_PreguntasS.SelectedRows[0].Cells["Pregunta"].Value).Trim();
+                claseSP.SP_ActualizarEstadoPregunta(pregunta);
                 CargaPreguntasSeguridad();
                 MessageBox.Show("Pregunta actualizada con exito");
             }
@@ -103,14 +135,15 @@ namespace Capa_Vista
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Close();   // formPanelAdmin lo abrió como hijo y vuelve a mostrarse solo
         }
+
         private void CargaPreguntasSeguridad()
         {
             dgv_PreguntasS.DataSource = claseSP.SP_CargaPreguntasSeguridad();
 
             if (dgv_PreguntasS.Columns["ID_Pregunta"] != null)
-                dgv_PreguntasS.Columns["ID_Pregunta"].Visible = false;
+                dgv_PreguntasS.Columns["ID_Pregunta"].HeaderText = "ID_Pregunta";
             if (dgv_PreguntasS.Columns["Pregunta"] != null)
                 dgv_PreguntasS.Columns["Pregunta"].HeaderText = "Pregunta";
             if (dgv_PreguntasS.Columns["Habilitada"] != null)
@@ -120,7 +153,6 @@ namespace Capa_Vista
             dgv_PreguntasS.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_PreguntasS.MultiSelect = false;
             dgv_PreguntasS.ReadOnly = true;
-
         }
     }
 }
