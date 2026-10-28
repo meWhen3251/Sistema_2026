@@ -192,7 +192,7 @@ GO
 INSERT INTO PSeguridad VALUES
     ('¿Cómo se llamaba tu primer mascota?',1),
     ('¿En qué ciudad nació?',1),
-    ('¿Cuál era el modelo de tu primer coche?',0),
+    ('¿Cuál era el modelo de tu primer coche?',1),
     ('¿Cual es tu color favorito?',0),
     ('¿De dónde es tu padre?',0),
     ('¿Nombre de tu ciudad favorita?',0),
@@ -200,6 +200,62 @@ INSERT INTO PSeguridad VALUES
     ;
 GO
 
-INSERT INTO Roles (Nombre) VALUES
-('Usuario'),('Administrador');
+INSERT INTO Roles (Nombre) VALUES ('Usuario'),('Administrador');
+GO
+
+-- Configuraciones del sistema
+INSERT INTO Configuraciones (Accion, Valor)
+SELECT v.Accion, v.Valor
+FROM (VALUES
+    (N'MinCaracteres',     N'8'),   -- mínimo de caracteres de la contraseña
+    (N'CantidadPreguntas', N'3'),   -- preguntas de seguridad a responder (0 = todas las activas)
+    (N'MayusMinus',        N'1'),   -- obliga mayúsculas y minúsculas
+    (N'NumerosLetras',     N'1'),   -- obliga números y letras
+    (N'CaracterEspecial',  N'1'),   -- obliga al menos un carácter especial
+    (N'Auth2FA',           N'0'),   -- autenticación en dos pasos por correo
+    (N'NoRepetirPass',     N'1'),   -- no repetir contraseñas anteriores
+    (N'NoDatosPersonales', N'1')    -- no contener datos personales
+) 
+AS v(Accion, Valor)
+WHERE NOT EXISTS (SELECT 1 FROM Configuraciones WHERE Configuraciones.Accion = v.Accion);
+GO
+
+-- Usuario Administrador Inicial (Necesario para el primer uso del sistema
+DECLARE @user   VARCHAR(50)  = 'admin';
+DECLARE @pass   VARCHAR(50)  = 'admin';              -- temporal
+DECLARE @correo NVARCHAR(50) = N'tu_correo@gmail.com'; -- necesario para recuperar la contraseña
+
+IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE Nombre = @user)
+BEGIN
+    -- Mismo hash que genera la app: SHA256(contraseña + usuario), en minúsculas
+    DECLARE @hash NVARCHAR(64) = LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @pass + @user), 2));
+
+    BEGIN TRY
+        BEGIN TRANSACTION
+
+            INSERT INTO Personas (Nombre, Apellido, Correo)
+            VALUES (N'Administrador', N'Sistema', @correo);
+            DECLARE @ID_Persona INT = SCOPE_IDENTITY();
+
+            INSERT INTO Contrasenas (contrasena, fecha_creacion)
+            VALUES (@hash, GETDATE());
+            DECLARE @ID_Pass INT = SCOPE_IDENTITY();
+
+            INSERT INTO Usuarios (Nombre, ID_Persona, ID_Clave)
+            VALUES (@user, @ID_Persona, @ID_Pass);
+            DECLARE @ID_Usuario INT = SCOPE_IDENTITY();
+
+            INSERT INTO Historico_Contrasenas (ID_Usuario, ID_Pass, Activo)
+            VALUES (@ID_Usuario, @ID_Pass, 1);
+
+            INSERT INTO RolesUsuarios_Comp (ID_Rol, ID_Usuario)
+            SELECT ID_Rol, @ID_Usuario FROM Roles WHERE Nombre IN (N'Usuario', N'Administrador');
+
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
 GO

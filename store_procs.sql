@@ -734,6 +734,129 @@ BEGIN
     END
 END
 GO
+-- ?. Borrar las respuestas de seguridad de un usuario (para que pueda registrarlas de nuevo) [NUEVO]
+CREATE PROCEDURE SP_EliminarRespuestasUsuario
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION
+
+            DECLARE @Respuestas TABLE (ID_Respuesta INT);
+            DELETE FROM RSeguridadUsuarios_Comp
+                OUTPUT deleted.ID_Respuesta INTO @Respuestas
+                WHERE ID_Usuario = @ID_Usuario;
+            DELETE FROM RSeguridad WHERE ID_Respuesta IN (SELECT ID_Respuesta FROM @Respuestas);
+
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
+
+-- 5. Modificar los datos personales de un usuario
+--    El nombre de usuario NO se modifica: forma parte del hash de la contraseña.
+CREATE PROCEDURE SP_ModificarDatosUsuario
+    @ID_Usuario INT,
+    @Nombre NVARCHAR(150),
+    @Apellido NVARCHAR(150),
+    @Correo NVARCHAR(150)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @ID_Persona INT = (SELECT ID_Persona FROM Usuarios WHERE ID_Usuario = @ID_Usuario);
+
+    IF @ID_Persona IS NULL
+    BEGIN
+        RAISERROR('El usuario no existe.', 16, 1)
+        RETURN
+    END
+
+    IF LEN(@Nombre) > 40 OR LEN(@Apellido) > 40 OR LEN(@Correo) > 50
+    BEGIN
+        RAISERROR('Largo máximo: nombre y apellido 40 caracteres, correo 50.', 16, 1)
+        RETURN
+    END
+
+    IF EXISTS (SELECT 1 FROM Personas WHERE Correo = @Correo AND ID_Persona <> @ID_Persona)
+    BEGIN
+        RAISERROR('El correo ya está registrado por otro usuario.', 16, 1)
+        RETURN
+    END
+
+    UPDATE Personas
+    SET Nombre = @Nombre, Apellido = @Apellido, Correo = @Correo
+    WHERE ID_Persona = @ID_Persona
+END
+GO
+
+-- 6. Eliminar un usuario completo (respuestas, contraseñas, roles, permisos, familias, usuario y persona)
+--    No permite eliminar al único administrador.
+CREATE PROCEDURE SP_EliminarUsuario
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @ID_Persona INT = (SELECT ID_Persona FROM Usuarios WHERE ID_Usuario = @ID_Usuario);
+
+    IF @ID_Persona IS NULL
+    BEGIN
+        RAISERROR('El usuario no existe.', 16, 1)
+        RETURN
+    END
+
+    IF EXISTS (SELECT 1 FROM RolesUsuarios_Comp
+               INNER JOIN Roles ON Roles.ID_Rol = RolesUsuarios_Comp.ID_Rol
+               WHERE RolesUsuarios_Comp.ID_Usuario = @ID_Usuario AND Roles.Nombre = 'Administrador')
+       AND (SELECT COUNT(*) FROM RolesUsuarios_Comp
+            INNER JOIN Roles ON Roles.ID_Rol = RolesUsuarios_Comp.ID_Rol
+            WHERE Roles.Nombre = 'Administrador') <= 1
+    BEGIN
+        RAISERROR('No se puede eliminar al único administrador del sistema.', 16, 1)
+        RETURN
+    END
+
+    BEGIN TRY
+        BEGIN TRANSACTION
+
+            -- Respuestas de seguridad
+            DECLARE @Respuestas TABLE (ID_Respuesta INT);
+            DELETE FROM RSeguridadUsuarios_Comp
+                OUTPUT deleted.ID_Respuesta INTO @Respuestas
+                WHERE ID_Usuario = @ID_Usuario;
+            DELETE FROM RSeguridad WHERE ID_Respuesta IN (SELECT ID_Respuesta FROM @Respuestas);
+
+            -- Asignaciones
+            DELETE FROM RolesUsuarios_Comp    WHERE ID_Usuario = @ID_Usuario;
+            DELETE FROM PermisosUsuarios_Comp WHERE ID_Usuario = @ID_Usuario;
+            DELETE FROM FamiliaUsuarios_Comp  WHERE ID_Usuario = @ID_Usuario;
+
+            -- Contraseñas
+            DECLARE @Claves TABLE (ID_Pass INT);
+            DELETE FROM Historico_Contrasenas
+                OUTPUT deleted.ID_Pass INTO @Claves
+                WHERE ID_Usuario = @ID_Usuario;
+            DELETE FROM Contrasenas WHERE ID_Pass IN (SELECT ID_Pass FROM @Claves);
+
+            -- Usuario y persona
+            DELETE FROM Usuarios WHERE ID_Usuario = @ID_Usuario;
+            DELETE FROM Personas WHERE ID_Persona = @ID_Persona;
+
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
 
 -- 23. Modificar nombre de rol
 CREATE PROCEDURE SP_ModificarRol
@@ -887,4 +1010,4 @@ BEGIN
     FROM Usuarios
     INNER JOIN Personas ON Usuarios.ID_Persona = Personas.ID_Persona
     WHERE Usuarios.ID_Usuario = @ID_Usuario; -- Es igual a CargarUsuariosDetalle, unicamente que añadi esta linea
-END
+END 
