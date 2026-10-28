@@ -177,6 +177,24 @@ namespace Capa_Datos
             };
             return DB.UsarSP_ConParametros("SP_ObtenerPermisosFaltantesUsuario", parametros);
         }
+        //SP_ObtenerPermisosUsuario - Obtiene los permisos que no tiene un usuario
+        public DataTable SP_ObtenerRolesFaltantesUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("ID_Usuario", idUsuario)
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerRolesFaltantesUsuario", parametros);
+        }
+        //SP_ObtenerFamiliasFaltantesUsuario - Obtiene las familias que no tiene un usuario
+        public DataTable SP_ObtenerFamiliasFaltantesUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("ID_Usuario", idUsuario)
+            };
+            return DB.UsarSP_ConParametros("SP_ObtenerFamiliasFaltantesUsuario", parametros);
+        }
         //SP_ObtenerRolesDeUsuario - Obtiene los roles que tiene vinculado un usuario
         public DataTable SP_ObtenerRolesDeUsuario(int idUsuario)
         {
@@ -353,12 +371,12 @@ namespace Capa_Datos
         // Asigna un rol a un usuario por nombre (no por ID).
         // El SP busca internamente los IDs correspondientes.
         // Ignora la operación si el usuario ya tiene ese rol.
-        public void SP_AgregarRolUsuario(string Rol, string Usuario)
+        public void SP_AgregarRolUsuario(int idRol, int idUsuario)
         {
             SqlParameter[] parametros = new SqlParameter[]
             {
-                new SqlParameter("@Rol", Rol),
-                new SqlParameter("@User", Usuario)
+                new SqlParameter("@ID_Rol", idRol),
+                new SqlParameter("@ID_Usuario", idUsuario)
             };
             DB.UsarSP_ConParametros("SP_AgregarRolUsuario", parametros);
         }
@@ -473,6 +491,39 @@ namespace Capa_Datos
                 new SqlParameter("@ID_Usuario", idUsuario)
             };
             DB.UsarSP_ConParametros("SP_QuitarAsignacionUsuario", parametros);
+        }
+
+        // Borra todas las respuestas de seguridad de un usuario
+        public void SP_EliminarRespuestasUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Usuario", idUsuario)
+            };
+            DB.UsarSP_ConParametros("SP_EliminarRespuestasUsuario", parametros);
+        }
+
+        // Modifica nombre, apellido y correo (el nombre de usuario no se puede cambiar)
+        public void SP_ModificarDatosUsuario(int idUsuario, string nombre, string apellido, string correo)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Usuario", idUsuario),
+                new SqlParameter("@Nombre", nombre),
+                new SqlParameter("@Apellido", apellido),
+                new SqlParameter("@Correo", correo)
+            };
+            DB.UsarSP_ConParametros("SP_ModificarDatosUsuario", parametros);
+        }
+
+        // Elimina al usuario por completo (respuestas, contraseñas, roles, permisos, familias, usuario y persona)
+        public void SP_EliminarUsuario(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Usuario", idUsuario) 
+            };
+            DB.UsarSP_ConParametros("SP_EliminarUsuario", parametros);
         }
     }
 }

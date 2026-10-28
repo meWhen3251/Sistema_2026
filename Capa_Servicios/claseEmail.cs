@@ -70,7 +70,7 @@ namespace Capa_Servicios
                 // AuthenticateAsync: inicia sesión con la cuenta de Gmail.
                 // La segunda cadena NO es la contraseña de Gmail sino una "App Password" generada en la configuración de seguridad de Google.
                 // Google bloquea el login con la contraseña normal desde aplicaciones externas.
-                await client.AuthenticateAsync("francisco.urena1b@gmail.com", "zgdi tfsm vpjn gpuu");
+                await client.AuthenticateAsync("francisco.urena1b@gmail.com", "jrrq pqbp tygn tqil");
 
                 // SendAsync: envía el mensaje. "await" pausa aquí hasta que el servidor confirme.
                 await client.SendAsync(emailMessage);

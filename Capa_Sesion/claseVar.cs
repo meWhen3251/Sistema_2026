@@ -20,5 +20,9 @@ namespace Capa_Sesion
         // Indica si el usuario logueado tiene el rol "Administrador".
         // De esta manera, se controla si tiene acceso al formAdmin o no.
         public static bool esAdmin = false;
+
+        public static int idUsuarioSeleccionado = 0;
+
+        public static string nombreUsuarioSeleccionado = string.Empty;
     }
 }
