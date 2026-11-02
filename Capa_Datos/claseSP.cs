@@ -42,7 +42,14 @@ namespace Capa_Datos
         {
             return DB.UsarSP_SinParametros("SP_CargaUsuariosDetalle");
         }
-
+        public DataTable SP_CargaPermisos()
+        {
+            return DB.UsarSP_SinParametros("SP_CargarPermisos");
+        }
+        public DataTable SP_CargaFamilias()
+        {
+            return DB.UsarSP_SinParametros("SP_CargaFamilias");
+        }
         // ══════════════════════════════════════════════════════════════════════
         //  SPs CON PARÁMETROS — Consultas y validaciones
         // ══════════════════════════════════════════════════════════════════════
@@ -524,6 +531,60 @@ namespace Capa_Datos
                 new SqlParameter("@ID_Usuario", idUsuario) 
             };
             DB.UsarSP_ConParametros("SP_EliminarUsuario", parametros);
+        }
+
+        // true si la respuesta es correcta PARA ESA pregunta (formRecuperarContrasena)
+        public bool SP_VerificarRespuestaPregunta(int idUsuario, int idPregunta, string respuesta)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Usuario", idUsuario),
+                new SqlParameter("@ID_Pregunta", idPregunta),
+                new SqlParameter("@Respuesta", respuesta)
+            };
+            DataTable resultado = DB.UsarSP_ConParametros("SP_VerificarRespuestaPregunta", parametros);
+            return resultado.Rows.Count > 0;
+        }
+        // Elimina un rol (formAjusteRol). El SP rechaza los roles base y los que tienen usuarios asignados.
+        public void SP_EliminarRol(int idRol)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Rol", idRol) 
+            };
+            DB.UsarSP_ConParametros("SP_EliminarRol", parametros);
+        }
+
+        public void SP_ModificarPermiso(int idPermiso, string nuevoNombre)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+{
+                new SqlParameter("@ID_Permiso", idPermiso),
+                new SqlParameter("@NuevoNombre", nuevoNombre)
+};
+            DB.UsarSP_ConParametros("SP_ModificarPermiso", parametros);
+        }
+
+        // Le da al usuario los 9 permisos del administrador.
+        // Se llama después de asignarle el rol Administrador.
+        public void SP_AsignarPermisosAdministrador(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Usuario", idUsuario) 
+            };
+            DB.UsarSP_ConParametros("SP_AsignarPermisosAdministrador", parametros);
+        }
+
+        // Le quita al usuario los permisos que recibió por ser administrador.
+        // Se llama después de quitarle el rol Administrador.
+        public void SP_QuitarPermisosAdministrador(int idUsuario)
+        {
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Usuario", idUsuario) 
+            };
+            DB.UsarSP_ConParametros("SP_QuitarPermisosAdministrador", parametros);
         }
     }
 }
