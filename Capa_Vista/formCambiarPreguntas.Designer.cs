@@ -60,7 +60,7 @@
             // 
             tbox_Contrasena.Location = new Point(12, 69);
             tbox_Contrasena.Name = "tbox_Contrasena";
-            tbox_Contrasena.Size = new Size(100, 23);
+            tbox_Contrasena.Size = new Size(108, 23);
             tbox_Contrasena.TabIndex = 2;
             tbox_Contrasena.UseSystemPasswordChar = true;
             // 

@@ -1,4 +1,14 @@
-﻿using Capa_Datos;
+﻿/// formCambioPreguntas.cs: el usuario que inició sesión (administrador o común) cambia sus preguntas de seguridad.
+///
+/// CÓMO FUNCIONA:
+///   1) Al abrirse, muestra las preguntas de seguridad que le tocan (activas, al azar y la cantidad configurada),
+///      cada una con una caja para responder.
+///   2) Al apretar "Guardar":
+///        - verifica la contraseña actual (para que nadie pueda cambiar las respuestas de una sesión abierta),
+///        - verifica que no haya respuestas vacías,
+///        - borra las respuestas anteriores y guarda las nuevas.
+
+using Capa_Datos;
 using Capa_Logica;
 using Capa_Sesion;
 using System.Data;
@@ -17,42 +27,31 @@ namespace Capa_Vista
             InitializeComponent();
         }
 
+        // =====================================================================
+        //  AL ABRIR: mostrar las preguntas
+        // =====================================================================
+
         private void formCambiarPreguntas_Load(object sender, EventArgs e)
         {
             flp_PreguntaSeg.Controls.Clear();
             idPreguntas.Clear();
             cantTextboxes.Clear();
 
-            // Paso 1: quedarse solo con las preguntas activas
-            DataTable todas = claseSP.SP_CargaPreguntasSeguridad();
-            List<DataRow> activas = new List<DataRow>();
-            foreach (DataRow fila in todas.Rows)
-            {
-                if (Convert.ToInt32(fila["Habilitada"]) == 1)
-                {
-                    activas.Add(fila);
-                }
-            }
+            // Las preguntas que le tocan: las activas, mezcladas al azar, y la cantidad configurada
+            List<DataRow> preguntas = politicasDeSeguridad.PreguntasParaResponder();
 
-            if (activas.Count == 0)
+            if (preguntas.Count == 0)
             {
                 MessageBox.Show("No hay preguntas de seguridad activas. Contactá al administrador.");
                 BeginInvoke(new Action(Close));   // se cierra un instante después: un formulario no puede cerrarse dentro de su propio Load
                 return;
             }
 
-            // Paso 2: cuántas mostrar (la cantidad configurada; si vale 0 o no alcanza, todas las activas)
-            int cantidad = activas.Count;
-            if (claseVar.contadorPreguntas > 0 && claseVar.contadorPreguntas <= activas.Count)
-            {
-                cantidad = claseVar.contadorPreguntas;
-            }
-
-            // Paso 3: por cada pregunta, crear un Label (el texto) y un TextBox (la respuesta)
-            for (int i = 0; i < cantidad; i++)
+            // Por cada pregunta, crear un Label (el texto) y un TextBox (la respuesta)
+            foreach (DataRow pregunta in preguntas)
             {
                 Label etiqueta = new Label();
-                etiqueta.Text = activas[i]["Pregunta"].ToString().Trim();
+                etiqueta.Text = pregunta["Pregunta"].ToString().Trim();
                 etiqueta.AutoSize = true;
 
                 TextBox caja = new TextBox();
@@ -62,10 +61,15 @@ namespace Capa_Vista
                 flp_PreguntaSeg.Controls.Add(etiqueta);
                 flp_PreguntaSeg.Controls.Add(caja);
 
-                idPreguntas.Add(Convert.ToInt32(activas[i]["ID_Pregunta"]));
+                idPreguntas.Add(Convert.ToInt32(pregunta["ID_Pregunta"]));
                 cantTextboxes.Add(caja);
             }
         }
+
+        // =====================================================================
+        //  GUARDAR
+        // =====================================================================
+
         private void btn_Guardar_Click(object sender, EventArgs e)
         {
             // Paso 1: la contraseña actual tiene que ser correcta
@@ -114,14 +118,11 @@ namespace Capa_Vista
             {
                 MessageBox.Show("Error al guardar las preguntas: " + ex.Message);
             }
-
         }
 
         private void btn_Volver_Click(object sender, EventArgs e)
         {
-            formPanelGeneral formPanelGeneral = new formPanelGeneral();
-            formPanelGeneral.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

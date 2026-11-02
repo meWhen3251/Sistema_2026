@@ -19,11 +19,7 @@ namespace Capa_Vista
 
         private void formAjusteUsuario_Load(object sender, EventArgs e)
         {
-            CargarDatosUsuario();
-            CargarRoles();
-            CargarFamilias();
-            CargarPermisos();
-            CargarPreguntasRespondidas();
+            CargarTodasListas();
         }
 
         // =================================================================================//
@@ -105,6 +101,15 @@ namespace Capa_Vista
             CargarLista(lbox_Permisos, claseSP.SP_ObtenerPermisosDeUsuario(claseVar.idUsuarioSeleccionado), "Permiso", "ID_Permiso");
         }
 
+        private void CargarTodasListas()
+        {
+            CargarRoles();
+            CargarFamilias();
+            CargarPermisos();
+            CargarDatosUsuario();
+            CargarPreguntasRespondidas();
+        }
+
         private void CargarPreguntasRespondidas()
         {
             lbox_PSRespondidas.Items.Clear();
@@ -120,7 +125,7 @@ namespace Capa_Vista
         //  QUITAR (roles, familias y permisos comparten la misma lógica)
         //  tipo: "Rol", "Familia" o "Permiso"
         // =================================================================================//
-        private void QuitarAsignacion(ListBox lista, string tipo, string columnaID, string columnaNombre, Action recargar)
+        private void QuitarAsignacion(ListBox lista, string tipo, string columnaID, string columnaNombre)
         {
             if (lista.SelectedItem is not DataRowView fila)
             {
@@ -138,79 +143,70 @@ namespace Capa_Vista
             try
             {
                 claseSP.SP_QuitarAsignacionUsuario(tipo, id, claseVar.idUsuarioSeleccionado);
+
+                if (tipo == "Rol" && nombre.ToLower() == "administrador")
+                {
+                    claseSP.SP_QuitarPermisosAdministrador(claseVar.idUsuarioSeleccionado);
+                }
+
                 MessageBox.Show($"Se quitó \"{nombre}\" ({tipo.ToLower()}) del usuario.");
-                recargar();
+                CargarTodasListas();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al quitar: " + ex.Message);
             }
         }
+        private void btn_QuitarRol_Click(object sender, EventArgs e)
+        {
+            QuitarAsignacion(lbox_Roles, "Rol", "ID_Rol", "Nombre");
+        }
+
+        private void btn_QuitarFamilia_Click(object sender, EventArgs e)
+        {
+            QuitarAsignacion(lbox_Familias, "Familia", "ID_Familia", "Nombre");
+        }
+
+        private void btn_QuitarPermiso_Click(object sender, EventArgs e)
+        {
+            QuitarAsignacion(lbox_Permisos, "Permiso", "ID_Permiso", "Permiso");
+        }
 
         // =================================================================================//
         //  Abre los respectivos formularios y, al volver, recarga la lista correspondiente
         // =================================================================================//
-        private void AbrirSelector(Form selector, Action recargar)
+        private void AbrirSelector(Form selector)
         {
             selector.FormClosed += (s, args) =>
             {
-                recargar();
+                CargarTodasListas();
                 this.Show();
             };
             this.Hide();
             selector.Show();
         }
 
-        private void btn_QuitarRol_Click(object sender, EventArgs e)
-        {
-            QuitarAsignacion(lbox_Roles, "Rol", "ID_Rol", "Nombre", CargarRoles);
-        }
-
-        private void btn_QuitarFamilia_Click(object sender, EventArgs e)
-        {
-            QuitarAsignacion(lbox_Familias, "Familia", "ID_Familia", "Nombre", CargarFamilias);
-        }
-
-        private void btn_QuitarPermiso_Click(object sender, EventArgs e)
-        {
-            QuitarAsignacion(lbox_Permisos, "Permiso", "ID_Permiso", "Permiso", CargarPermisos);
-        }
-
         private void btn_AgregarRol_Click(object sender, EventArgs e)
         {
-            AbrirSelector(new formRolUser(), CargarRoles);
+            AbrirSelector(new formRolUser());
         }
 
         private void btn_AgregarFamilia_Click(object sender, EventArgs e)
         {
-            AbrirSelector(new formFamUser(), CargarFamilias);
+            AbrirSelector(new formFamUser());
         }
 
         private void btn_AgregarPermiso_Click(object sender, EventArgs e)
         {
-            AbrirSelector(new formPermUser(), CargarPermisos);
+            AbrirSelector(new formPermUser());
         }
         private void btn_ModificarDatos_Click(object sender, EventArgs e)
         {
-            var formModificarDatos = new formModificarDatos();
-            formModificarDatos.FormClosed += (s, args) =>
-            {
-                CargarDatosUsuario();
-                this.Show();
-            };
-            this.Hide();
-            formModificarDatos.Show();
+            AbrirSelector(new formModificarDatos());
         }
 
         private async void btn_SolicitarNuevaPass_Click(object sender, EventArgs e)
         {
-            int cantidad = Convert.ToInt32(claseSP.SP_ObtenerCantidadContrasenas(claseVar.idUsuarioSeleccionado).Rows[0]["CantidadContrasenas"]);
-            if (cantidad == 1)
-            {
-                MessageBox.Show("Este usuario todavía no hizo su primer ingreso: ya tiene una contraseña temporal pendiente.");
-                return;
-            }
-
             DataTable datos = claseSP.SP_ObtenerDatosUsuario(claseVar.idUsuarioSeleccionado);
             if (datos.Rows.Count == 0)
             {
@@ -221,9 +217,20 @@ namespace Capa_Vista
             string usuario = datos.Rows[0]["NombreUsuario"].ToString().Trim();
             string correo = datos.Rows[0]["Correo"].ToString().Trim();
 
-            if (MessageBox.Show("Se generará una contraseña temporal y se enviará a "+ correo + "¿Continuar?",
-                    "Solicitar nueva contraseña", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            // Si el usuario nunca inició sesión (tiene una sola contraseña, la temporal del alta), no se puede pedir otra:
+            // dejaría de ser "primer ingreso" y nunca registraría sus preguntas de seguridad.
+            DataTable cantidadPass = claseSP.SP_ObtenerCantidadContrasenas(claseVar.idUsuarioSeleccionado);
+            if (Convert.ToInt32(cantidadPass.Rows[0]["CantidadContrasenas"]) == 1)
+            {
+                MessageBox.Show("Este usuario todavía no hizo su primer ingreso: ya tiene una contraseña temporal pendiente.");
                 return;
+            }
+
+            if (MessageBox.Show("Se generará una contraseña temporal y se enviará a " + correo + ".\n¿Continuar?",
+                "Solicitar nueva contraseña", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
 
             try
             {
@@ -250,11 +257,6 @@ namespace Capa_Vista
                 btn_SolicitarNuevaPass.Enabled = true;
             }
         }
-        private void btn_Volver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btn_Eliminar_Click(object sender, EventArgs e)
         {
             // El administrador no puede eliminarse a sí mismo
@@ -267,7 +269,7 @@ namespace Capa_Vista
             string usuario = claseVar.nombreUsuarioSeleccionado;
 
             DialogResult respuesta = MessageBox.Show(
-                "¿Eliminar al usuario " +usuario + "?. Se borrarán sus datos, contraseñas, roles, permisos y familias. Esta acción no se puede deshacer.",
+                "¿Eliminar al usuario " + usuario + "?. Se borrarán sus datos, contraseñas, roles, permisos y familias. Esta acción no se puede deshacer.",
                 "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
@@ -288,7 +290,13 @@ namespace Capa_Vista
             {
                 MessageBox.Show("Error al eliminar el usuario: " + ex.Message);
             }
-
         }
+
+        private void btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
     }
 }

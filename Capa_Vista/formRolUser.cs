@@ -31,7 +31,13 @@ namespace Capa_Vista
 
                 claseSP.SP_AgregarRolUsuario(idRol, claseVar.idUsuarioSeleccionado);
 
-                MessageBox.Show($"Rol \"{rol}\" agregado al usuario con éxito.");
+                // Si el rol agregado es Administrador, también se le dan los permisos del administrador
+                if (rol.ToLower() == "administrador")
+                {
+                    claseSP.SP_AsignarPermisosAdministrador(claseVar.idUsuarioSeleccionado);
+                }
+
+                MessageBox.Show("Rol " + rol +" agregado al usuario con éxito.");
                 CargarListaRolesUsuario();
                 btn_AgregarRol.Text = "Agregar rol (nombre de rol)";
             }
