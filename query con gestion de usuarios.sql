@@ -220,7 +220,25 @@ AS v(Accion, Valor)
 WHERE NOT EXISTS (SELECT 1 FROM Configuraciones WHERE Configuraciones.Accion = v.Accion);
 GO
 
--- Usuario Administrador Inicial (Necesario para el primer uso del sistema
+-- Permisos predeterminados del sistema
+INSERT INTO Permisos(Permiso, Descripcion)
+SELECT v.Permiso, v.Descripcion
+FROM (VALUES
+    (N'Panel de Administracion', 'Acceso al panel de administrador'),
+    (N'Panel de Configuraciones', N'Acceso al panel de configuraciones'),
+    (N'Panel de Preguntas',N'Acceso al panel de Preguntas'),
+    (N'Panel de Usuarios', N'Acceso al panel de configuracion de usuario'),
+    (N'Panel de Roles',  N'Acceso al panel de Roles'),
+    (N'Panel de Familias', N'Acceso al panel de Familias'),
+    (N'Panel de Permisos', N'Acceso al panel de Permisos'),
+    (N'Panel de Alta de Usuario', N'Acceso al panel de Alta de Usuarios')
+) 
+AS v(Permiso, Descripcion)
+WHERE NOT EXISTS (SELECT 1 FROM Permisos WHERE Permisos.Permiso = v.Permiso);
+GO
+
+
+-- Usuario Administrador Inicial (Necesario para el primer uso del sistema)
 DECLARE @user   VARCHAR(50)  = 'admin';
 DECLARE @pass   VARCHAR(50)  = 'admin';              -- temporal
 DECLARE @correo NVARCHAR(50) = N'tu_correo@gmail.com'; -- necesario para recuperar la contraseña
@@ -250,6 +268,13 @@ BEGIN
 
             INSERT INTO RolesUsuarios_Comp (ID_Rol, ID_Usuario)
             SELECT ID_Rol, @ID_Usuario FROM Roles WHERE Nombre IN (N'Usuario', N'Administrador');
+
+            INSERT INTO PermisosUsuarios_Comp (ID_Permiso, ID_Usuario, razon)
+            SELECT Permisos.ID_Permiso, @ID_Usuario, 'Rol Administrador'
+            FROM Permisos
+            WHERE Permisos.Permiso IN ('Vista de Usuarios', 'Panel de Administracion', 'Panel de Configuraciones',
+                                       'Panel de Preguntas', 'Panel de Usuarios', 'Panel de Roles',
+                                       'Panel de Familias', 'Panel de Permisos', 'Panel de Alta de Usuario');
 
         COMMIT TRANSACTION
     END TRY

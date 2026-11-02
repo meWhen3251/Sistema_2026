@@ -204,9 +204,6 @@ BEGIN
 END
 GO
 
-
-
-
 -- 11. Cargar Usuarios para la listbox, con su ID para luego poder hacer modificaciones
 CREATE PROCEDURE SP_CargaUsuarios
 AS
@@ -253,6 +250,26 @@ BEGIN
         Personas.Correo   AS Correo
     FROM Usuarios
     INNER JOIN Personas ON Usuarios.ID_Persona = Personas.ID_Persona
+END
+GO
+
+-- ?. SP PARA CARGAR TODOS LOS PERMISOS (NUEVO)
+
+CREATE PROCEDURE SP_CargarPermisos
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT ID_Permiso, Permiso, Descripcion FROM Permisos;
+END
+GO
+
+-- ?. SP PARA CARGAR TODAS LAS FAMILIAS (NUEVO)
+
+CREATE PROCEDURE SP_CargaFamilias
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT ID_Familia, Nombre FROM Familia;
 END
 GO
 
@@ -1003,11 +1020,136 @@ BEGIN
     SET NOCOUNT ON;
     SELECT 
         Usuarios.ID_Usuario,
-        Usuarios.Nombre   AS NombreUsuario,
-        Personas.Nombre   AS Nombre,
+        Usuarios.Nombre AS NombreUsuario,
+        Personas.Nombre AS Nombre,
         Personas.Apellido AS Apellido,
-        Personas.Correo   AS Correo
+        Personas.Correo AS Correo
     FROM Usuarios
     INNER JOIN Personas ON Usuarios.ID_Persona = Personas.ID_Persona
     WHERE Usuarios.ID_Usuario = @ID_Usuario; -- Es igual a CargarUsuariosDetalle, unicamente que añadi esta linea
-END 
+END
+GO
+
+-- ?. Elimina un rol (rechaza los roles base y los que tienen usuarios asignados)
+CREATE PROCEDURE SP_EliminarRol
+    @ID_Rol INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    DECLARE @Nombre NVARCHAR(30) = (SELECT Nombre FROM Roles WHERE ID_Rol = @ID_Rol);
+ 
+    IF @Nombre IS NULL
+    BEGIN
+        RAISERROR('El rol no existe.', 16, 1)
+        RETURN
+    END
+ 
+    IF RTRIM(@Nombre) IN ('Usuario', 'Administrador')
+    BEGIN
+        RAISERROR('No se pueden eliminar los roles base (Usuario y Administrador).', 16, 1)
+        RETURN
+    END
+ 
+    IF EXISTS (SELECT 1 FROM RolesUsuarios_Comp WHERE ID_Rol = @ID_Rol)
+    BEGIN
+        RAISERROR('No se puede eliminar el rol: hay usuarios que lo tienen asignado.', 16, 1)
+        RETURN
+    END
+ 
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DELETE FROM Familia_Comp WHERE ID_Rol = @ID_Rol;
+            DELETE FROM PermisosRoles_Comp WHERE ID_Rol = @ID_Rol;
+            DELETE FROM Roles WHERE ID_Rol = @ID_Rol;
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
+
+-- ?. Verifica la respuesta de UNA pregunta concreta (devuelve una fila si es correcta)
+CREATE PROCEDURE SP_VerificarRespuestaPregunta
+    @ID_Usuario INT,
+    @ID_Pregunta INT,
+    @Respuesta NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    SELECT RSeguridad.ID_Respuesta
+    FROM RSeguridad
+    INNER JOIN RSeguridadUsuarios_Comp ON RSeguridad.ID_Respuesta = RSeguridadUsuarios_Comp.ID_Respuesta
+    WHERE RSeguridadUsuarios_Comp.ID_Usuario = @ID_Usuario
+      AND RSeguridad.ID_Pregunta = @ID_Pregunta
+      AND RSeguridad.Respuesta = @Respuesta
+END
+GO
+
+-- ?. Modificar nombre de rol (NUEVO)
+CREATE PROCEDURE SP_ModificarPermiso
+    @ID_Permiso INT,
+    @NuevoNombre NVARCHAR(100)
+AS
+BEGIN
+    IF EXISTS (SELECT * FROM Permisos WHERE ID_Permiso = @ID_Permiso)
+        BEGIN
+        BEGIN TRANSACTION
+            UPDATE Permisos
+            SET Permiso = @NuevoNombre
+            WHERE ID_Permiso = @ID_Permiso
+        COMMIT TRANSACTION
+        END
+END
+GO
+
+-- ?. Dar permisos comunes a usuario cuando se le concede rol de Administrador (NUEVO)
+----  Se llama DESPUÉS de asignarle el rol Administrador al usuario.
+----  Es seguro llamarlo más de una vez: no repite los permisos que el usuario ya tiene.
+CREATE PROCEDURE SP_AsignarPermisosAdministrador
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE ID_Usuario = @ID_Usuario)
+    BEGIN
+        RAISERROR('El usuario no existe.', 16, 1)
+        RETURN
+    END
+
+    INSERT INTO PermisosUsuarios_Comp (ID_Permiso, ID_Usuario, razon)
+    SELECT Permisos.ID_Permiso, @ID_Usuario, 'Rol Administrador'
+    FROM Permisos
+    WHERE Permisos.Permiso IN ('Vista de Usuarios', 'Panel de Administracion', 'Panel de Configuraciones',
+                               'Panel de Preguntas', 'Panel de Usuarios', 'Panel de Roles',
+                               'Panel de Familias', 'Panel de Permisos', 'Panel de Alta de Usuario')
+      AND NOT EXISTS (SELECT 1 FROM PermisosUsuarios_Comp 
+                     WHERE PermisosUsuarios_Comp.ID_Permiso = Permisos.ID_Permiso 
+                     AND PermisosUsuarios_Comp.ID_Usuario = @ID_Usuario)
+END
+GO
+
+-- ? Quitar los permisos del administrador. (NUEVO)
+----    Se llama DESPUÉS de quitarle el rol Administrador al usuario.
+----    Solo borra los permisos que se habían dado por el rol (razon = 'Rol Administrador').
+CREATE PROCEDURE SP_QuitarPermisosAdministrador
+    @ID_Usuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+ 
+    IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE ID_Usuario = @ID_Usuario)
+    BEGIN
+        RAISERROR('El usuario no existe.', 16, 1)
+        RETURN
+    END
+ 
+    DELETE FROM PermisosUsuarios_Comp
+    WHERE ID_Usuario = @ID_Usuario
+      AND razon = 'Rol Administrador'
+END
+GO
