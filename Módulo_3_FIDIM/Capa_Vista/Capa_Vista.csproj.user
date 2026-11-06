@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="formIndexMod3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="formInfoArt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="formInfoOC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="formInfoPresup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="formInfoSolCompraInterna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="formRepositor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

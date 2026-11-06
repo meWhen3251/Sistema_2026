@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Capa_Datos/Capa_Datos.csproj" Id="1567c685-7dbf-4fdd-a41b-7d58a2c9307b" />
+  <Project Path="Capa_Logica/Capa_Logica.csproj" Id="7793580a-b3ec-4494-a17e-916d6f41f4f6" />
+  <Project Path="Capa_Servicios/Capa_Servicios.csproj" Id="eb7b0416-3a4d-4b59-b0b0-aaaf33b8c156" />
+  <Project Path="Capa_Sesion/Capa_Sesion.csproj" Id="8c9041c5-3193-4032-b505-fff83ac6d22e" />
+  <Project Path="Capa_Vista/Capa_Vista.csproj" Id="a65e405c-5bb6-4467-9495-3bca9ea4d61f" />
+</Solution>
