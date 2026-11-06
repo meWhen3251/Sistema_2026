@@ -1,0 +1,12 @@
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\bin\Debug\Formulario.exe.config
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\bin\Debug\Formulario.exe
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\bin\Debug\Formulario.pdb
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\bin\Debug\Formulario.xml
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\WindowsApplication1.Form1.resources
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\WindowsApplication1.Form2.resources
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\WindowsApplication1.Resources.resources
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\Formulario.vbproj.GenerateResource.Cache
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\Formulario.exe
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\Formulario.xml
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\Formulario.pdb
+D:\USB Drive\Forumulario Ventas\Formulario\Formulario\obj\Debug\WindowsApplication1.Form3.resources
